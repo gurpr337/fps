@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download More FPS!</title>
+    <!-- Tailwind CSS CDN for general layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define CSS Variables for the new color palette */
+        :root {
+            --bg-primary: #0A0D1F; /* Deep Space Blue */
+            --bg-secondary: #1A2036; /* Dark Galactic Grey */
+            --text-default: #E0E6F7; /* Electric Silver */
+            --accent-green: #00A350; /* Refined, gamer-looking Green */
+            --accent-green-hover: #008028; /* Darker hover for the new Green */
+            --accent-purple: #8A2BE2; /* Synthwave Purple */
+            --accent-purple-hover: #6A1BA0; /* Darker Synthwave Purple */
+            --accent-teal: #00CED1; /* Plasma Teal */
+            --accent-teal-hover: #00B2B5; /* Slightly darker teal */
+            --accent-yellow: #FFD700; /* Cyber Yellow */
+            --btn-disabled: #3A425F; /* Muted Blue-Grey for disabled elements and some backgrounds */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary); /* Apply primary background color */
+            color: var(--text-default); /* Apply default text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-y: auto; /* Allows vertical scrolling for very small screens if necessary */
+        }
+        .game-container {
+            background-color: var(--bg-secondary); /* Apply secondary background color */
+            border-radius: 1rem; /* Slightly smaller rounded corners */
+            padding: 1rem; /* Reduced padding */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3); /* Slightly smaller shadow */
+            text-align: center;
+            max-width: 98%; /* Increased max-width for very small screens */
+            width: 550px; /* Reduced fixed width */
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem; /* Reduced global gap */
+            position: relative; /* For floating FPS text */
+            margin-top: 0.5rem; /* Reduced margin */
+            margin-bottom: 0.5rem; /* Reduced margin */
+        }
+
+        /* Container for the two main buttons */
+        .main-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted minmax for smaller width */
+            gap: 0.5rem; /* Reduced gap */
+            margin-top: 0.5rem; /* Reduced space from elements above */
+            margin-bottom: 0; 
+        }
+
+        /* Common style for the two large main action buttons */
+        .btn-main-action {
+            height: 40px; /* Reduced height */
+            font-size: 0.95rem; /* Reduced font size */
+            font-weight: bold;
+            color: white; 
+            border: none;
+            border-radius: 0.5rem; /* Slightly reduced rounding */
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); /* Reduced shadow */
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Slightly reduced shadow */
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            width: 100%; 
+        }
+
+        /* Specific style for "More FPS!!!" button */
+        .btn-more-fps {
+            background-color: var(--accent-green);
+        }
+        .btn-more-fps:hover {
+            background-color: var(--accent-green-hover);
+            transform: scale(1.02);
+        }
+        .btn-more-fps:active {
+            transform: scale(0.98);
+        }
+        .btn-more-fps:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 163, 80, 0.5); /* Focus ring matching accent green */
+        }
+
+        /* Specific style for "Sell FPS!" button */
+        .btn-sell-fps {
+            background-color: var(--accent-purple);
+        }
+        .btn-sell-fps:hover {
+            background-color: var(--accent-purple-hover);
+            transform: scale(1.02);
+        }
+        .btn-sell-fps:active {
+            transform: scale(0.98);
+        }
+        .btn-sell-fps:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.5);
+        }
+
+        /* Basic, Reliable Upgrade Button Styling (applies Accent Purple) */
+        .btn-upgrade {
+            background-color: var(--accent-purple); 
+            color: white; 
+            font-weight: bold;
+            font-size: 0.85rem; /* Reduced font size */
+            padding: 0.5rem 1rem; /* Reduced padding */
+            border: none;
+            border-radius: 0.3rem; /* Reduced rounding */
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4); /* Reduced text shadow */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            min-width: 80px; /* Reduced min-width */
+            height: 32px; /* Reduced height */
+        }
+        .btn-upgrade:hover {
+            background-color: var(--accent-purple-hover); 
+            transform: scale(1.05);
+        }
+        .btn-upgrade:active {
+            transform: scale(0.95);
+        }
+        .btn-upgrade:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.4); /* Reduced focus ring */
+        }
+
+        .disabled-btn {
+            background-color: var(--btn-disabled) !important; 
+            color: var(--text-default) !important; 
+            cursor: not-allowed;
+            opacity: 0.6;
+            filter: grayscale(50%);
+            transform: none !important;
+            box-shadow: none;
+        }
+        .upgrade-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted minmax */
+            gap: 0.5rem; /* Reduced gap */
+            margin-bottom: 0.75rem; /* Reduced margin */
+        }
+        .upgrade-card {
+            background-color: var(--bg-secondary); 
+            padding: 0.6rem; /* Reduced padding */
+            border-radius: 0.5rem; /* Reduced rounded-xl */
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06); /* Reduced shadow */
+            display: flex;
+            flex-direction: column;
+            min-height: 120px; /* Reduced min-height */
+            text-align: center;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; 
+        }
+        .upgrade-card.fade-out {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        .upgrade-card h3 {
+            font-size: 1rem; /* Reduced text-xl */
+            font-weight: 600; 
+            margin-bottom: 0.3rem; /* Reduced margin */
+            color: white; 
+        }
+        .upgrade-card p {
+            font-size: 0.75rem; /* Reduced text-sm */
+            color: var(--text-default); 
+            margin-bottom: 0.3rem; /* Reduced margin */
+            flex-grow: 1;
+        }
+        /* Styling for the cost and level display - now centered */
+        .cost-level-info {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            gap: 0.3rem; /* Reduced gap */
+            font-weight: bold;
+            color: var(--accent-yellow); 
+            margin-bottom: 0.3rem; /* Reduced margin */
+            white-space: nowrap; 
+            font-size: 0.85rem; /* Reduced font size */
+        }
+        .cost-display { 
+            white-space: nowrap; 
+            color: var(--accent-yellow); 
+        }
+        .upgrade-level-text {
+             color: var(--accent-yellow); 
+        }
+        /* Style for the divider between cost and level */
+        .cost-level-info .divider {
+            color: var(--text-default); 
+            margin: 0 0.1rem; /* Reduced margin */
+        }
+
+        .upgrade-card-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            margin-top: auto;
+            padding-top: 0.6rem; /* Reduced padding */
+            width: 100%;
+        }
+
+        /* Progress Bar Styling (General) */
+        .progress-bar-container {
+            width: 100%; 
+            background-color: var(--btn-disabled); 
+            border-radius: 0.3rem; /* Reduced rounding */
+            box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.5); /* Reduced shadow */
+            height: 24px; /* Reduced height */
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            min-width: 0%;
+            transition: width 0.3s ease-out;
+            border-radius: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .progress-bar-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.75rem; /* Reduced font size */
+            font-weight: bold; 
+            color: white; 
+            padding-left: 0.3rem; 
+            padding-right: 0.3rem; 
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.6); 
+            pointer-events: none;
+        }
+
+        /* Specific Progress Bar Styling for Download Progress */
+        #download-progress-fill {
+            background-color: var(--accent-green); 
+        }
+
+        /* Specific Progress Bar Styling for Total FPS */
+        .total-fps-progress-fill {
+            background-color: var(--accent-purple); 
+        }
+
+        /* Floating text animation */
+        .fps-float {
+            position: absolute;
+            color: var(--accent-green); 
+            font-size: 1.1rem; /* Reduced font size */
+            font-weight: bold;
+            opacity: 0;
+            animation: floatUpFadeOut 1.2s ease-out forwards; /* Reduced animation duration */
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes floatUpFadeOut {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-30px) scale(1.05); /* Reduced float distance and scale */
+                opacity: 0;
+            }
+        }
+
+        /* Custom Message Box for Reset, Congratulations, and Info */
+        .message-box-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.4s ease-out; /* Reduced transition for fade out */
+        }
+        .message-box-content {
+            background-color: var(--bg-secondary); 
+            color: var(--text-default); 
+            padding: 15px; /* Reduced padding */
+            border-radius: 1rem; /* Reduced rounded corners */
+            box-shadow: 0 3px 10px rgba(0,0,0,0.6); /* Reduced shadow */
+            text-align: center;
+            max-width: 320px; /* Reduced max-width */
+            width: 90%;
+            position: relative; /* Needed for X button positioning */
+        }
+
+        /* Styling for the new 1x2 grid for Fund and Market Price */
+        .currency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted minmax */
+            gap: 0.5rem; /* Reduced gap */
+            margin-top: 0.75rem; /* Reduced margin */
+            margin-bottom: 0; 
+        }
+        .currency-card {
+            background-color: var(--btn-disabled); 
+            padding: 0.6rem; /* Reduced padding */
+            border-radius: 0.5rem; /* Reduced rounded-xl */
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06); 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem; /* Reduced text-lg */
+            min-height: 60px; /* Reduced min-height */
+        }
+        .currency-card span {
+            font-weight: bold;
+        }
+
+        /* Header Bar layout for title and buttons */
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem; /* Reduced margin */
+        }
+
+        .header-left-buttons, .header-right-buttons {
+            display: flex;
+            gap: 0.3rem; /* Gap between buttons */
+            align-items: center;
+        }
+
+        /* Adjustments for the main title to align with new layout */
+        .main-title {
+            font-size: 1.8rem; /* Reduced text-4xl */
+            line-height: 2rem; /* Reduced line-height */
+            font-weight: 800; 
+            flex-grow: 1; /* Allow title to grow */
+            margin: 0 0.5rem; /* Added horizontal margin */
+        }
+        @media (min-width: 768px) {
+            .main-title {
+                font-size: 2.2rem; /* md:text-5xl - keep larger for desktop but slightly reduced */
+                line-height: 1; 
+            }
+        }
+
+        /* Minimalist Share and Info button styles */
+        .share-button, .info-button {
+            width: 30px;
+            height: 30px;
+            padding: 0; /* No padding, rely on icon size */
+            border-radius: 50%; /* Make them circular */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem; /* Size of the icon */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            cursor: pointer;
+            border: none;
+        }
+        .share-button {
+            background-color: var(--accent-purple);
+            color: white;
+        }
+        .share-button:hover {
+            background-color: var(--accent-purple-hover);
+            transform: scale(1.05);
+        }
+        .share-button:active {
+            transform: scale(0.95);
+        }
+        .share-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.4);
+        }
+        .info-button {
+            background-color: var(--accent-green); /* Changed to accent green */
+            color: white;
+        }
+        .info-button:hover {
+            background-color: var(--accent-green-hover); /* Changed to accent green hover */
+            transform: scale(1.05);
+        }
+        .info-button:active {
+            transform: scale(0.95);
+        }
+        .info-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 163, 80, 0.5); /* Changed to accent green focus */
+        }
+
+        /* Test button specific styles (still hidden by default) */
+        .btn-test {
+            font-size: 0.7rem; /* Reduced font size */
+            padding: 0.3rem 0.6rem; /* Reduced padding */
+            border-radius: 0.3rem; /* Reduced rounding */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Reduced shadow */
+            background-color: var(--accent-yellow); /* Make test button visually distinct */
+            color: var(--bg-primary); /* Dark text on yellow */
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .btn-test:hover {
+            transform: scale(1.05);
+            background-color: #FFEA00; /* Slightly lighter yellow on hover */
+        }
+        .btn-test:active {
+            transform: scale(0.95);
+        }
+        .btn-test:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Clipboard message styling */
+        .clipboard-message {
+            position: absolute; /* Changed to absolute to be relative to game container */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.85); /* Slightly darker */
+            color: white;
+            padding: 6px 12px; /* Reduced padding */
+            border-radius: 5px; /* Reduced rounded corners */
+            font-size: 0.9rem; /* Reduced font size */
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out; /* Reduced transition duration */
+            z-index: 2000;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+
+        .clipboard-message.show {
+            opacity: 1;
+        }
+
+        /* Style for the "Ray Tracing Unlocked" message */
+        .achievement-unlocked-message {
+            font-size: 1.3rem; /* Reduced font size */
+            margin-top: 0.6rem; /* Reduced margin */
+            margin-bottom: 0.6rem; /* Reduced margin */
+            font-weight: bold;
+            color: var(--accent-teal); /* Plasma Teal for a cool effect */
+            animation: pulseGlow 1.8s infinite alternate; /* Slightly faster pulse effect */
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                text-shadow: 0 0 4px var(--accent-teal);
+            }
+            100% {
+                text-shadow: 0 0 12px var(--accent-teal), 0 0 20px var(--accent-teal);
+            }
+        }
+
+        /* Max Level Message Box */
+        .max-level-message {
+            padding: 6px 10px; /* Reduced padding */
+            border-radius: 5px; /* Reduced rounded corners */
+            font-size: 0.8rem; /* Reduced font size */
+            position: absolute; /* Changed to absolute for positioning */
+            background-color: rgba(0, 0, 0, 0.9);
+            color: var(--accent-yellow);
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Reduced transition */
+            z-index: 1000;
+            white-space: nowrap;
+            transform: translate(-50%, -50%); /* Center horizontally and vertically */
+        }
+        .max-level-message.show {
+            opacity: 1;
+            transform: translate(-50%, calc(-50% - 15px)); /* Move up by 15px on show */
+        }
+
+        /* Styles for the stage tick marks on the total FPS bar */
+        .stage-tick-marks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            pointer-events: none; /* Allows clicks to pass through */
+            z-index: 10;
+        }
+
+        .stage-tick-mark {
+            position: absolute;
+            height: 100%;
+            width: 1px; /* Thinner tick mark */
+            background-color: rgba(255, 255, 255, 0.1); /* More faint */
+            pointer-events: none;
+        }
+
+        /* Close button for message boxes */
+        .message-box-close-button {
+            position: absolute;
+            top: 8px; /* Adjusted position */
+            right: 8px; /* Adjusted position */
+            background: none;
+            border: none;
+            font-size: 1.1rem; /* Reduced font size */
+            color: var(--text-default);
+            cursor: pointer;
+            padding: 3px; /* Reduced padding */
+            line-height: 1;
+        }
+        .message-box-close-button:hover {
+            color: var(--accent-teal);
+        }
+    </style>
+</head>
+<body>
+    <div id="game" class="game-container">
+        <!-- Header Bar for Title and Buttons -->
+        <div class="header-bar">
+            <div class="header-left-buttons">
+                <button id="info-button" class="info-button" title="How to Play"><i class="fas fa-info-circle"></i></button>
+                <!-- Test button remains hidden and is meant for console access -->
+                <button id="test-button" class="btn-test hidden">Test</button>
+            </div>
+            <h1 class="main-title">Download More FPS!</h1>
+            <div class="header-right-buttons">
+                <button id="share-button" class="share-button" title="Share Game"><i class="fas fa-share-alt"></i></button>
+            </div>
+        </div>
+        
+        <!-- Stage Information and Unlock Button -->
+        <div class="stage-info-container text-center mb-2">
+            <h2 id="stage-display" class="text-xl font-bold text-accent-teal">Pre-Stage: Initializing Core Drivers</h2>
+            <div id="final-achievement-display" class="achievement-unlocked-message hidden">
+                Ray Tracing Minecraft Unlocked!
+            </div>
+            <button id="unlock-next-stage-button" class="btn-upgrade !bg-blue-600 hover:!bg-blue-700 mt-2 hidden">Unlock Next Stage!</button>
+        </div>
+
+        <!-- Total FPS as a Progress Bar -->
+        <div id="total-fps-bar-wrapper" class="progress-bar-container mt-2 mb-1">
+            <div id="total-fps-progress-fill" class="progress-bar-fill total-fps-progress-fill" style="width: 0%;"></div>
+            <span id="total-fps-progress-text" class="progress-bar-text">Total FPS: 0</span>
+            <div id="stage-tick-marks-container" class="stage-tick-marks-container">
+                <!-- Tick marks will be injected here by JavaScript -->
+            </div>
+        </div>
+
+        <div class="progress-bar-container mt-1 mb-2">
+            <div id="download-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
+            <span id="download-progress-text" class="progress-bar-text">0%</span>
+        </div>
+
+        <!-- Container for More FPS and Sell FPS buttons -->
+        <div class="main-buttons-grid">
+            <button id="download-button" class="btn-main-action btn-more-fps">
+                More FPS!!!
+            </button>
+
+            <button id="sell-fps-button" class="btn-main-action btn-sell-fps">
+                Sell 0 FPS!
+            </button>
+        </div>
+        
+        <!-- Currency grid for Fund and Market Price -->
+        <div class="currency-grid">
+            <div class="currency-card">
+                <span>Money:</span> 
+                <span id="money-display" class="font-bold text-yellow-200">0</span>
+            </div>
+            <div class="currency-card">
+                <span>FPS Market Price:</span>
+                <span id="fps-market-price-display" class="font-bold text-cyan-300">1.00</span>
+            </div>
+        </div>
+
+        <!-- Upgrade Sections - All are initially hidden by default via JS unless explicitly shown -->
+        <div id="upgrade-sections-container" class="upgrade-section">
+            <!-- Upgrades will be dynamically added/removed here by JavaScript -->
+            <!-- Stage 1 Upgrades (visible from start) -->
+            <div id="upgrade-card-click-upgrade" class="upgrade-card">
+                <h3>GPU Cores</h3>
+                <p>Increases FPS per click.</p>
+                <div class="cost-level-info">
+                    <span id="click-upgrade-cost" class="cost-display">Cost: $15</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="click-upgrade-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-click-upgrade" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-auto-upgrade" class="upgrade-card">
+                <h3>Network Bandwidth</h3>
+                <p>Automatic downloads.</p>
+                <div class="cost-level-info">
+                    <span id="auto-upgrade-cost" class="cost-display">Cost: $5</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="auto-upgrade-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-auto-upgrade" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <!-- All other upgrade cards will be dynamically inserted/removed here -->
+            <div id="upgrade-card-efficiency-upgrade" class="upgrade-card hidden">
+                <h3>Modpack Optimization</h3>
+                <p>Multiplies all FPS gained.</p>
+                <div class="cost-level-info">
+                    <span id="efficiency-upgrade-cost" class="cost-display">Cost: $1000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="efficiency-upgrade-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-efficiency-upgrade" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-money-multiplier-upgrade" class="upgrade-card hidden">
+                <h3>Money Multiplier</h3>
+                <p>Increases money from selling FPS.</p>
+                <div class="cost-level-info">
+                    <span id="money-multiplier-upgrade-cost" class="cost-display">Cost: $500</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="money-multiplier-upgrade-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-money-multiplier-upgrade" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-market-price-upgrade" class="upgrade-card hidden">
+                <h3>Market Price</h3>
+                <p>Boosts base FPS market value.</p>
+                <div class="cost-level-info">
+                    <span id="market-price-upgrade-cost" class="cost-display">Cost: $150</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="market-price-upgrade-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-market-price-upgrade" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-market-volatility-upgrade" class="upgrade-card hidden">
+                <h3>Market Volatility</h3>
+                <p>Increases FPS price fluctuations.</p>
+                <div class="cost-level-info">
+                    <span id="market-volatility-upgrade-cost" class="cost-display">Cost: $2000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="market-volatility-upgrade-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-market-volatility-upgrade" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-auto-sell-upgrade" class="upgrade-card hidden">
+                <h3>Auto Sell</h3>
+                <p>Automatically sells FPS.</p>
+                <div class="cost-level-info">
+                    <span id="auto-sell-upgrade-cost" class="cost-display">Cost: $10000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="auto-sell-upgrade-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-auto-sell-upgrade" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-quantum-cpu" class="upgrade-card hidden">
+                <h3>Quantum CPU</h3>
+                <p>Massive FPS click/auto boosts.</p>
+                <div class="cost-level-info">
+                    <span id="quantum-cpu-cost" class="cost-display">Cost: $10,000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="quantum-cpu-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-quantum-cpu" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-virtual-gpu" class="upgrade-card hidden">
+                <h3>Virtual GPU</h3>
+                <p>Boosts automatic FPS rate.</p>
+                <div class="cost-level-info">
+                    <span id="virtual-gpu-cost" class="cost-display">Cost: $50,000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="virtual-gpu-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-virtual-gpu" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-dimensional-filter" class="upgrade-card hidden">
+                <h3>Dimensional Filter</h3>
+                <p>Multiplies all FPS gains.</p>
+                <div class="cost-level-info">
+                    <span id="dimensional-filter-cost" class="cost-display">Cost: $250,000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="dimensional-filter-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-dimensional-filter" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-universe-replication" class="upgrade-card hidden">
+                <h3>Universe Replication</h3>
+                <p>Generates infinite auto FPS.</p>
+                <div class="cost-level-info">
+                    <span id="universe-replication-cost" class="cost-display">Cost: $1,000,000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="universe-replication-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-universe-replication" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-causal-loop" class="upgrade-card hidden">
+                <h3>Causal Loop</h3>
+                <p>Massive global FPS multiplier.</p>
+                <div class="cost-level-info">
+                    <span id="causal-loop-cost" class="cost-display">Cost: $5,000,000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="causal-loop-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-causal-loop" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+
+            <div id="upgrade-card-trans-market-hub" class="upgrade-card hidden">
+                <h3>Omni-Market Singularity</h3>
+                <p>Ensures peak FPS market prices.</p>
+                <div class="cost-level-info">
+                    <span id="trans-market-hub-cost" class="cost-display">Cost: $10,000,000</span>
+                    <span class="divider"> | </span>
+                    <span class="upgrade-level-text">Level <span id="trans-market-hub-level">0</span></span>
+                </div>
+                <div class="upgrade-card-footer">
+                    <button id="buy-trans-market-hub" class="btn-upgrade">Buy</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <button id="reset-game" class="btn-upgrade !bg-red-600 hover:!bg-red-700 mt-4">Reset Game</button>
+    </div>
+
+    <script>
+        // --- Game State Variables ---
+        let currentFPS = 0;
+        let totalFPSDownloaded = 0;
+        let money = 0; 
+        let downloadProgress = 0;
+        const downloadTarget = 100;
+        const fpsPerFullDownload = 10;
+        const FINAL_FPS_GOAL = 1000000;
+        let finalAchievementUnlocked = false;
+
+        let fpsMarketPrice = 1.00; 
+        let marketBasePrice = 1.00; 
+        let marketVolatility = 1.0; 
+        let marketTrendSpeed = 0.0001; 
+
+        // --- Stage System Variables ---
+        let currentStage = 0; // Start at 0 for "Pre-Stage"
+        const numStages = 20; // Total number of defined stages (1 to 20)
+        const stageInfo = {}; // Will be populated dynamically
+        const MAX_UPGRADE_LEVEL = 10; // All upgrades max out at level 10
+        let maxedOutUpgradesSet = new Set(); // Stores IDs of upgrades that have reached max level
+
+        // Emojis for each stage
+        const stageEmojis = [
+            "🚀", // Stage 0 (Pre-Stage)
+            "💻", // Stage 1
+            "⚙️", // Stage 2
+            "🔥", // Stage 3
+            "⚡", // Stage 4
+            "🌐", // Stage 5
+            "🔗", // Stage 6
+            "🧠", // Stage 7
+            "📈", // Stage 8
+            "🌌", // Stage 9
+            "🌀", // Stage 10
+            "🧊", // Stage 11
+            "⚛️", // Stage 12
+            "🌠", // Stage 13
+            "✨", // Stage 14
+            "⏱️", // Stage 15
+            "👾", // Stage 16
+            "💫", // Stage 17
+            "📈", // Stage 18
+            "🌌", // Stage 19
+            "🌟"  // Stage 20 (Final Stage)
+        ];
+
+        // Define these variables in the global scope before they are used.
+        const perStageFPSBonusFactor = 1.05; // Each stage provides a 5% bonus to base FPS gained
+        const initialFpsThresholdForStage1 = 500;
+        
+        // Calculate growth factor for FPS thresholds
+        const fpsThresholdGrowthFactor = Math.pow(FINAL_FPS_GOAL / initialFpsThresholdForStage1, 1 / (numStages - 1));
+       
+
+        for (let i = 0; i <= numStages; i++) {
+            let stageTitleSuffix = "";
+            let totalFpsThresh = 0;
+            let moneyThresh = 0; 
+
+            if (i === 0) { // Pre-Stage
+                stageTitleSuffix = "Initializing Core Drivers";
+                totalFpsThresh = 0;
+                moneyThresh = 0;
+            } else {
+                // Calculate totalFps threshold exponentially
+                totalFpsThresh = Math.round(initialFpsThresholdForStage1 * Math.pow(fpsThresholdGrowthFactor, i - 1));
+                
+                switch(i) {
+                    case 1: stageTitleSuffix = "Basic Rig Buildout"; break;
+                    case 2: stageTitleSuffix = "OS Optimization Suite"; break;
+                    case 3: stageTitleSuffix = "Advanced Thermal Management"; break;
+                    case 4: stageTitleSuffix = "SSD Overclocking Protocol"; break;
+                    case 5: stageTitleSuffix = "Next-Gen RAM Module"; break;
+                    case 6: stageTitleSuffix = "Fiber Optic Network"; break;
+                    case 7: stageTitleSuffix = "Quantum Entanglement Link"; break;
+                    case 8: stageTitleSuffix = "Virtual Machine Re-allocation"; break;
+                    case 9: stageTitleSuffix = "Distributed Computing Grid"; break;
+                    case 10: stageTitleSuffix = "Neural Network Optimization"; break;
+                    case 11: stageTitleSuffix = "Gravitational Data Compression"; break;
+                    case 12: stageTitleSuffix = "Dark Matter Cooling System"; break;
+                    case 13: stageTitleSuffix = "Sub-Atomic FPS Accelerator"; break;
+                    case 14: stageTitleSuffix = "Parallel Universe Render Farm"; break;
+                    case 15: stageTitleSuffix = "Interdimensional Resource Harvesting"; break;
+                    case 16: stageTitleSuffix = "Chronological Frame Alignment"; break;
+                    case 17: stageTitleSuffix = "Astro-Quantum Processor Integration"; break;
+                    case 18: stageTitleSuffix = "Cosmic Thread Optimization"; break;
+                    case 19: stageTitleSuffix = "Singularity Simulation Protocol"; break;
+                    case 20: stageTitleSuffix = "Minecraft Omniverse Unlocked!"; break; 
+                    default: stageTitleSuffix = "Unknown Territory"; break; 
+                }
+            }
+            
+            // Ensure final stage threshold is exactly FINAL_FPS_GOAL
+            if (i === numStages) {
+                totalFpsThresh = FINAL_FPS_GOAL;
+            }
+            
+            // Construct the full title with emoji
+            const stageTitle = i === 0 ? `Pre-Stage ${stageEmojis[i]}: ${stageTitleSuffix}` : `Stage ${i} ${stageEmojis[i]}: ${stageTitleSuffix}`;
+
+            stageInfo[i] = {
+                title: stageTitle,
+                unlockThreshold: { totalFps: totalFpsThresh, money: moneyThresh }, 
+                // Upgrades unlocked at each stage
+                upgradesUnlockedAtStage: (function() {
+                    switch(i) {
+                        case 0: return ['click-upgrade', 'auto-upgrade'];
+                        case 1: return ['efficiency-upgrade'];
+                        case 2: return ['money-multiplier-upgrade'];
+                        case 3: return ['market-price-upgrade'];
+                        case 4: return ['market-volatility-upgrade'];
+                        case 5: return ['auto-sell-upgrade'];
+                        case 6: return ['quantum-cpu'];
+                        case 7: return ['virtual-gpu'];
+                        case 8: return ['dimensional-filter'];
+                        case 9: return ['universe-replication'];
+                        case 10: return ['causal-loop'];
+                        case 11: return ['trans-market-hub']; // Now Omni-Market Singularity
+                        default: return []; 
+                    }
+                })(),
+                fpsGainMultiplier: Math.pow(perStageFPSBonusFactor, i)
+            };
+        }
+
+        // --- Upgrade Configuration ---
+        // Defines all upgrades with their properties and current levels
+        const upgradesConfig = {
+            'click-upgrade': {
+                level: 0,
+                baseCost: 15,
+                costMultiplier: 1.5,
+                powerIncrease: 1, 
+                type: 'click', 
+            },
+            'auto-upgrade': {
+                level: 0,
+                baseCost: 5,
+                costMultiplier: 1.6,
+                startValue: 10, 
+                rateMultiplierPerLevel: 1.2, 
+                type: 'auto',
+            },
+            'efficiency-upgrade': {
+                level: 0,
+                baseCost: 1000,
+                costMultiplier: 2,
+                multiplierPerLevel: 1.1, 
+                type: 'efficiency',
+            },
+            'money-multiplier-upgrade': { 
+                level: 0,
+                baseCost: 500,
+                costMultiplier: 1.7,
+                multiplierPerLevel: 1.15, 
+                type: 'money_multiplier',
+            },
+            'market-price-upgrade': {
+                level: 0,
+                baseCost: 150,
+                costMultiplier: 1.8,
+                priceIncrease: 0.5, 
+                type: 'market',
+            },
+            'market-volatility-upgrade': { 
+                level: 0,
+                baseCost: 2000,
+                costMultiplier: 2.5,
+                increasePerLevel: 0.1, 
+                type: 'market_volatility',
+            },
+            'auto-sell-upgrade': { 
+                level: 0,
+                baseCost: 10000,
+                costMultiplier: 3.0,
+                intervalReduction: 50, 
+                type: 'auto_sell',
+            },
+            'quantum-cpu': {
+                level: 0,
+                baseCost: 10000,
+                costMultiplier: 2.5,
+                powerIncrease: 50, 
+                type: 'click_auto_bonus', 
+            },
+            'virtual-gpu': {
+                level: 0,
+                baseCost: 50000,
+                costMultiplier: 2.8,
+                rateIncrease: 100, 
+                type: 'auto_bonus',
+            },
+            'dimensional-filter': {
+                level: 0,
+                baseCost: 250000,
+                costMultiplier: 3,
+                multiplierPerLevel: 1.2, 
+                type: 'global_efficiency_bonus',
+            },
+            'universe-replication': {
+                level: 0,
+                baseCost: 1000000,
+                costMultiplier: 3.5,
+                rateIncrease: 5000, 
+                type: 'auto_bonus',
+            },
+            'causal-loop': {
+                level: 0,
+                baseCost: 5000000,
+                costMultiplier: 4,
+                multiplierPerLevel: 1.5, 
+                type: 'global_efficiency_bonus',
+            },
+            'trans-market-hub': { // Renamed to Omni-Market Singularity in UI
+                level: 0,
+                baseCost: 10000000,
+                costMultiplier: 4.5,
+                priceBoost: 5, 
+                type: 'market_bonus',
+            }
+        };
+
+        // --- Derived Stats (will be recalculated by recalculateStats) ---
+        let fpsPerClickCurrent = 0;
+        let fpsPerSecondCurrent = 0;
+        let efficiencyMultiplierTotal = 1;
+        let moneyMultiplierTotal = 1; 
+        let currentMarketVolatility = 1.0; 
+        let autoSellActive = false; 
+        let autoSellIntervalId = null; 
+        let stageFPSGainMultiplier = 1;
+
+        // --- DOM Elements (populated in window.onload) ---
+        const elements = {};
+
+        /**
+         * Formats a number with commas for every thousands place.
+         * @param {number} num The number to format.
+         * @returns {string} The formatted number string.
+         */
+        function formatNumberWithCommas(num) {
+            return Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+
+        /**
+         * Calculates the cost of an upgrade.
+         */
+        function calculateUpgradeCost(baseCost, level, multiplier) {
+            return Math.floor(baseCost * Math.pow(multiplier, level));
+        }
+
+        /**
+         * Recalculates all derived stats based on current upgrade levels.
+         */
+        function recalculateStats() {
+            // Get the current stage's specific FPS gain multiplier
+            const currentStageData = stageInfo[currentStage] || stageInfo[0];
+            stageFPSGainMultiplier = currentStageData.fpsGainMultiplier || 1.0;
+
+            // Reset derived stats
+            fpsPerClickCurrent = 5; 
+            fpsPerSecondCurrent = 0;
+            efficiencyMultiplierTotal = 1;
+            moneyMultiplierTotal = 1;
+            marketBasePrice = 1.00;
+            currentMarketVolatility = 1.0;
+            autoSellActive = false;
+
+            // Apply all upgrade effects based on their type
+            for (const upgradeId in upgradesConfig) {
+                const upgrade = upgradesConfig[upgradeId];
+                // Only skip if level is 0. If it's maxed (level 10), its effects still apply.
+                if (upgrade.level === 0) continue;
+
+                switch (upgrade.type) {
+                    case 'click':
+                        fpsPerClickCurrent += upgrade.level * upgrade.powerIncrease;
+                        break;
+                    case 'auto':
+                        // For auto-upgrade, ensure it starts from its base and multiplies per level
+                        // If level 1, it's startValue; if level 2, startValue * rateMultiplierPerLevel, etc.
+                        if (upgrade.level > 0) {
+                            fpsPerSecondCurrent += upgrade.startValue * Math.pow(upgrade.rateMultiplierPerLevel, upgrade.level - 1);
+                        }
+                        break;
+                    case 'efficiency':
+                        efficiencyMultiplierTotal *= Math.pow(upgrade.multiplierPerLevel, upgrade.level);
+                        break;
+                    case 'money_multiplier': 
+                        moneyMultiplierTotal *= Math.pow(upgrade.multiplierPerLevel, upgrade.level);
+                        break;
+                    case 'market':
+                        marketBasePrice += upgrade.level * upgrade.priceIncrease;
+                        break;
+                    case 'market_volatility': 
+                        currentMarketVolatility += upgrade.level * upgrade.increasePerLevel;
+                        break;
+                    case 'auto_sell': 
+                        autoSellActive = true; 
+                        break;
+                    case 'click_auto_bonus': 
+                        fpsPerClickCurrent += upgrade.level * upgrade.powerIncrease;
+                        fpsPerSecondCurrent += upgrade.level * upgrade.powerIncrease; 
+                        break;
+                    case 'auto_bonus': 
+                        fpsPerSecondCurrent += upgrade.level * upgrade.rateIncrease;
+                        break;
+                    case 'global_efficiency_bonus': 
+                        efficiencyMultiplierTotal *= Math.pow(upgrade.multiplierPerLevel, upgrade.level);
+                        break;
+                    case 'market_bonus': 
+                        marketBasePrice += upgrade.level * upgrade.priceBoost;
+                        break;
+                }
+            }
+
+            // Manage auto-sell interval
+            if (autoSellActive && upgradesConfig['auto-sell-upgrade'].level > 0) {
+                const baseInterval = 5000; 
+                const levelReduction = upgradesConfig['auto-sell-upgrade'].level * upgradesConfig['auto-sell-upgrade'].intervalReduction;
+                const newInterval = Math.max(1000, baseInterval - levelReduction); 
+
+                // Clear any existing interval to prevent multiple running instances
+                if (autoSellIntervalId) {
+                    clearInterval(autoSellIntervalId);
+                }
+                autoSellIntervalId = setInterval(() => {
+                    if (currentFPS > 0) {
+                        const moneyGained = currentFPS * fpsMarketPrice * moneyMultiplierTotal; 
+                        money += moneyGained; 
+                        const priceDropAmount = (currentFPS / 100) * 0.05; 
+                        fpsMarketPrice = Math.max(0.2, fpsMarketPrice - priceDropAmount); 
+                        currentFPS = 0; 
+                        console.log(`Auto-sold ALL FPS for $${formatNumberWithCommas(moneyGained)} money.`); 
+                        updateUI();
+                        saveGame();
+                    }
+                }, newInterval);
+            } else {
+                // If auto-sell is no longer active or level is 0, clear the interval
+                if (autoSellIntervalId) {
+                    clearInterval(autoSellIntervalId);
+                    autoSellIntervalId = null;
+                }
+            }
+
+            updateUI(); 
+        }
+
+        /**
+         * Updates the UI for a specific upgrade card.
+         */
+        function updateUpgradeUI(upgradeId, upgrade) {
+            const costElement = elements[`${upgradeId}-cost`];
+            const levelElement = elements[`${upgradeId}-level`];
+            const buyButton = elements[`buy-${upgradeId}`];
+            const upgradeCard = elements[`upgrade-card-${upgradeId}`];
+
+            if (!upgradeCard || maxedOutUpgradesSet.has(upgradeId)) {
+                // If the card doesn't exist or is maxed and hidden, do nothing
+                return;
+            }
+
+            // Ensure the card is visible if it's not maxed out
+            upgradeCard.classList.remove('hidden');
+
+            if (upgrade.level >= MAX_UPGRADE_LEVEL) {
+                // Handle max level state: The card will be visually handled by handleMaxLevelReached on purchase,
+                // but if loading a game with maxed upgrades, ensure its text reflects MAX LEVEL.
+                if (costElement) costElement.textContent = `MAX LEVEL!`;
+                if (levelElement) levelElement.textContent = MAX_UPGRADE_LEVEL;
+                if (buyButton) {
+                    buyButton.disabled = true;
+                    buyButton.classList.add('disabled-btn');
+                    buyButton.textContent = "MAXED";
+                }
+            } else {
+                // Normal upgrade state
+                if (costElement) {
+                    const nextCost = calculateUpgradeCost(upgrade.baseCost, upgrade.level, upgrade.costMultiplier);
+                    costElement.textContent = `Cost: $${formatNumberWithCommas(nextCost)}`; 
+                }
+                if (levelElement) {
+                    levelElement.textContent = upgrade.level;
+                }
+                if (buyButton) {
+                    const nextCost = calculateUpgradeCost(upgrade.baseCost, upgrade.level, upgrade.costMultiplier);
+                    buyButton.disabled = money < nextCost; 
+                    if (buyButton.disabled) {
+                        buyButton.classList.add('disabled-btn');
+                    } else {
+                        buyButton.classList.remove('disabled-btn');
+                    }
+                    buyButton.textContent = "Buy";
+                }
+            }
+        }
+
+        /**
+         * Updates all UI elements.
+         */
+        function updateUI() {
+            elements.moneyDisplay.textContent = `$${formatNumberWithCommas(money)}`; 
+
+            const progressPercentage = (downloadProgress / downloadTarget) * 100;
+            elements.downloadProgressFill.style.width = `${progressPercentage}%`;
+            elements.downloadProgressText.textContent = `${Math.round(progressPercentage)}%`;
+            elements.downloadProgressText.style.display = 'block';
+
+            let totalFpsProgressPercentage = 0;
+            if (FINAL_FPS_GOAL > 0) {
+                totalFpsProgressPercentage = (totalFPSDownloaded / FINAL_FPS_GOAL) * 100;
+            }
+            totalFpsProgressPercentage = Math.min(100, totalFpsProgressPercentage);
+
+            elements.totalFpsProgressFill.style.width = `${totalFpsProgressPercentage}%`;
+            elements.totalFpsProgressText.textContent = `Total FPS: ${formatNumberWithCommas(totalFPSDownloaded)}`; 
+            elements.totalFpsProgressText.style.display = 'block';
+
+            if (totalFPSDownloaded >= FINAL_FPS_GOAL && !finalAchievementUnlocked) {
+                finalAchievementUnlocked = true;
+                elements.finalAchievementDisplay.classList.remove('hidden');
+            } else if (totalFPSDownloaded < FINAL_FPS_GOAL && finalAchievementUnlocked) {
+                finalAchievementUnlocked = false;
+                elements.finalAchievementDisplay.classList.add('hidden');
+            }
+
+            // Update all upgrade UIs dynamically
+            updateStageVisibility(); 
+            
+            elements.sellFpsButton.textContent = `Sell ${formatNumberWithCommas(currentFPS)} FPS!`; 
+            elements.sellFpsButton.disabled = currentFPS <= 0;
+            if (elements.sellFpsButton.disabled) {
+                elements.sellFpsButton.classList.add('disabled-btn');
+            } else {
+                elements.sellFpsButton.classList.remove('disabled-btn');
+            }
+
+            updateUnlockNextStageButton();
+        }
+
+        /**
+         * Progresses the download and grants FPS if complete.
+         */
+        function progressDownload(amount, event = null) {
+            downloadProgress += amount;
+
+            if (downloadProgress >= downloadTarget) {
+                const gainedFPS = fpsPerFullDownload * efficiencyMultiplierTotal * stageFPSGainMultiplier;
+                currentFPS += gainedFPS;
+                totalFPSDownloaded += gainedFPS;
+                downloadProgress = 0; 
+
+                if (event && elements.gameContainer) { 
+                    const floatText = document.createElement('div');
+                    floatText.className = 'fps-float';
+                    floatText.textContent = `+${formatNumberWithCommas(Math.floor(gainedFPS))} FPS!`; 
+
+                    const rect = elements.gameContainer.getBoundingClientRect();
+                    const relativeX = event.clientX - rect.left;
+                    const relativeY = event.clientY - rect.top;
+
+                    floatText.style.left = `${relativeX}px`;
+                    floatText.style.top = `${relativeY}px`;
+
+                    elements.gameContainer.appendChild(floatText);
+
+                    floatText.addEventListener('animationend', () => {
+                        floatText.remove();
+                    });
+                }
+            }
+            updateUI(); 
+        }
+
+        /**
+         * Updates the internal market price.
+         */
+        function updateMarketPrice() {
+            // Use currentMarketVolatility
+            fpsMarketPrice = marketBasePrice + (Math.random() - 0.5) * currentMarketVolatility;
+            fpsMarketPrice += (marketBasePrice - fpsMarketPrice) * marketTrendSpeed;
+            fpsMarketPrice = Math.max(0.2, Math.min(100.0, fpsMarketPrice)); 
+            elements.fpsMarketPriceDisplay.textContent = fpsMarketPrice.toFixed(2);
+        }
+
+        /**
+         * Sells all current FPS.
+         */
+        function sellFPS() {
+            if (currentFPS > 0) {
+                const moneyGained = currentFPS * fpsMarketPrice * moneyMultiplierTotal; 
+                money += moneyGained; 
+                const priceDropAmount = (currentFPS / 100) * 0.1; 
+                fpsMarketPrice = Math.max(0.2, fpsMarketPrice - priceDropAmount); 
+                currentFPS = 0; 
+                updateUI();
+                saveGame();
+            }
+        }
+
+        /**
+         * Handles an upgrade reaching its maximum level.
+         */
+        function handleMaxLevelReached(upgradeId) {
+            const upgradeCard = elements[`upgrade-card-${upgradeId}`];
+            if (upgradeCard && !maxedOutUpgradesSet.has(upgradeId)) {
+                // Add to set of maxed upgrades
+                maxedOutUpgradesSet.add(upgradeId);
+
+                // Create and show the congratulatory message
+                const congratsMessageBox = document.createElement('div');
+                congratsMessageBox.className = 'message-box-overlay'; 
+                congratsMessageBox.style.opacity = '0'; 
+
+                const congratsContent = document.createElement('div');
+                congratsContent.className = 'message-box-content'; 
+                congratsMessageBox.appendChild(congratsContent);
+
+                const upgradeTitle = upgradeCard.querySelector('h3').textContent;
+                congratsContent.innerHTML = `
+                    <button class="message-box-close-button">&times;</button>
+                    <h3 class="text-xl font-bold text-accent-teal mb-2">Congratulations!</h3>
+                    <p class="mb-3 text-lg">You've maxed out your "${upgradeTitle}"!</p>
+                    <p class="text-md text-gray-400">Its effects will continue to boost your game!</p>
+                `;
+                document.body.appendChild(congratsMessageBox);
+
+                // Add close button listener
+                congratsContent.querySelector('.message-box-close-button').addEventListener('click', () => {
+                    congratsMessageBox.style.opacity = '0';
+                    congratsMessageBox.addEventListener('transitionend', () => congratsMessageBox.remove(), { once: true });
+                });
+
+                // Trigger fade-in
+                setTimeout(() => {
+                    congratsMessageBox.style.opacity = '1';
+                }, 10); 
+
+                // Fade out the message after a few seconds
+                setTimeout(() => {
+                    congratsMessageBox.style.opacity = '0';
+                    congratsMessageBox.addEventListener('transitionend', () => {
+                        congratsMessageBox.remove();
+                    }, { once: true });
+                }, 2500); 
+
+                // Fade out the upgrade card
+                upgradeCard.classList.add('fade-out');
+
+                // After fade-out, remove the card from DOM
+                upgradeCard.addEventListener('transitionend', () => {
+                    upgradeCard.remove();
+                    saveGame(); 
+                }, { once: true });
+            }
+        }
+
+        /**
+         * Generic function to buy any upgrade.
+         */
+        function buyUpgrade(upgradeId) {
+            const upgrade = upgradesConfig[upgradeId];
+            if (!upgrade) {
+                console.error(`Upgrade with ID ${upgradeId} not found.`);
+                return;
+            }
+            if (upgrade.level >= MAX_UPGRADE_LEVEL) {
+                handleMaxLevelReached(upgradeId); 
+                return;
+            }
+
+            const cost = calculateUpgradeCost(upgrade.baseCost, upgrade.level, upgrade.costMultiplier);
+            if (money >= cost) { 
+                money -= cost; 
+                upgrade.level++;
+                if (upgradeId === 'click-upgrade' && upgrade.level <= MAX_UPGRADE_LEVEL) { 
+                    downloadProgress += 10;
+                    if (downloadProgress > downloadTarget) { 
+                        downloadProgress = downloadTarget;
+                    }
+                }
+                recalculateStats(); 
+                
+                if (upgrade.level >= MAX_UPGRADE_LEVEL) {
+                    handleMaxLevelReached(upgradeId);
+                } else {
+                    saveGame(); 
+                }
+            }
+        }
+
+        /**
+         * Checks if the conditions for the next stage are met.
+         */
+        function canUnlockNextStage() {
+            const nextStageNum = currentStage + 1;
+            if (nextStageNum > numStages) {
+                return false; 
+            }
+            const threshold = stageInfo[nextStageNum].unlockThreshold;
+            return totalFPSDownloaded >= threshold.totalFps;
+        }
+
+        /**
+         * Unlocks and transitions to the next stage.
+         */
+        function unlockNextStage() {
+            if (canUnlockNextStage()) {
+                const previousStage = currentStage;
+                currentStage++;
+                console.log(`Advancing to ${stageInfo[currentStage].title}`);
+                downloadProgress = 0;
+                
+                recalculateStats(); 
+                updateUI();
+                saveGame();
+
+                // Determine newly unlocked upgrades for the pop-up
+                // Get upgrades unlocked at the *new* currentStage
+                const newUpgrades = stageInfo[currentStage].upgradesUnlockedAtStage;
+                
+                // Filter out upgrades that were already unlocked in previous stages (up to previousStage)
+                const trulyNewUpgrades = newUpgrades.filter(upgradeId => {
+                    let wasAlreadyUnlocked = false;
+                    for (let i = 0; i < currentStage; i++) { // Check stages before the new currentStage
+                        if (stageInfo[i] && stageInfo[i].upgradesUnlockedAtStage.includes(upgradeId)) {
+                            wasAlreadyUnlocked = true;
+                            break;
+                        }
+                    }
+                    return !wasAlreadyUnlocked;
+                });
+                showStageUnlockedMessage(stageInfo[currentStage].title, trulyNewUpgrades);
+            }
+        }
+
+        /**
+         * Displays a message box for stage unlocked.
+         * @param {string} stageTitle The title of the unlocked stage.
+         * @param {Array<string>} newUpgrades An array of upgrade IDs that were just unlocked.
+         */
+        function showStageUnlockedMessage(stageTitle, newUpgrades) {
+            const messageBoxOverlay = document.createElement('div');
+            messageBoxOverlay.className = 'message-box-overlay';
+            messageBoxOverlay.style.opacity = '0'; // Start invisible for transition
+
+            const messageBoxContent = document.createElement('div');
+            messageBoxContent.className = 'message-box-content';
+            messageBoxOverlay.appendChild(messageBoxContent);
+
+            let upgradeMessage = '';
+            if (newUpgrades.length > 0) {
+                const upgradeNames = newUpgrades.map(id => {
+                    const cardElement = elements[`upgrade-card-${id}`];
+                    return cardElement ? cardElement.querySelector('h3').textContent : id;
+                });
+                if (upgradeNames.length === 1) {
+                    upgradeMessage = `New Upgrade Available: ${upgradeNames[0]}!`;
+                } else {
+                    upgradeMessage = `New Upgrades Available: ${upgradeNames.join(', ')}!`;
+                }
+            } else {
+                upgradeMessage = `No new upgrades available this stage.`;
+            }
+
+            messageBoxContent.innerHTML = `
+                <button class="message-box-close-button">&times;</button>
+                <h3 class="text-xl font-bold text-accent-teal mb-2">Congratulations!!</h3>
+                <p class="mb-3 text-lg">${upgradeMessage}</p>
+            `;
+            document.body.appendChild(messageBoxOverlay);
+
+            // Add close button listener
+            messageBoxContent.querySelector('.message-box-close-button').addEventListener('click', () => {
+                messageBoxOverlay.style.opacity = '0';
+                messageBoxOverlay.addEventListener('transitionend', () => messageBoxOverlay.remove(), { once: true });
+            });
+
+            // Add click-anywhere-to-close functionality on the overlay
+            messageBoxOverlay.addEventListener('click', (event) => {
+                // Check if the click was directly on the overlay, not on the content box itself
+                if (event.target === messageBoxOverlay) {
+                    messageBoxOverlay.style.opacity = '0';
+                    messageBoxOverlay.addEventListener('transitionend', () => messageBoxOverlay.remove(), { once: true });
+                }
+            });
+
+
+            // Trigger fade-in
+            setTimeout(() => {
+                messageBoxOverlay.style.opacity = '1';
+            }, 10);
+        }
+
+        /**
+         * Displays the game info message box.
+         */
+        function showGameInfoMessage() {
+            const messageBoxOverlay = document.createElement('div');
+            messageBoxOverlay.className = 'message-box-overlay';
+            messageBoxOverlay.style.opacity = '0'; // Start invisible for transition
+
+            const messageBoxContent = document.createElement('div');
+            messageBoxContent.className = 'message-box-content';
+            messageBoxOverlay.appendChild(messageBoxContent);
+
+            messageBoxContent.innerHTML = `
+                <button class="message-box-close-button">&times;</button>
+                <h3 class="text-xl font-bold text-accent-teal mb-2">How to Play</h3>
+                <p class="text-sm text-left mb-2">Download FPS and unlock upgrades until you reach the ultimate achievement of mankind.</p>
+                <ul class="text-left text-sm mb-3 list-disc list-inside">
+                    <li>Tap the More FPS!!! button to instantly download FPS.</li>
+                    <li>Sell FPS! you've downloaded to earn money. The market price fluctuates, so sell high!</li>
+                    <li>Use your money to purchase powerful Upgrades. These boost your click power, automate FPS downloads, increase money from sales, and more.</li>
+                    <li>Reach Total FPS goals to unlock new Stages. Each stage gives a global FPS bonus and reveals new, more powerful upgrades!</li>
+                    <li>Fully level up an upgrade to max its potential and earn an achievement!</li>
+                </ul>
+                <p class="text-sm text-gray-400">Good luck, gamer!</p>
+            `;
+            document.body.appendChild(messageBoxOverlay);
+
+            // Add close button listener
+            messageBoxContent.querySelector('.message-box-close-button').addEventListener('click', () => {
+                messageBoxOverlay.style.opacity = '0';
+                messageBoxOverlay.addEventListener('transitionend', () => messageBoxOverlay.remove(), { once: true });
+            });
+
+            // Add click-anywhere-to-close functionality on the overlay
+            messageBoxOverlay.addEventListener('click', (event) => {
+                // Check if the click was directly on the overlay, not on the content box itself
+                if (event.target === messageBoxOverlay) {
+                    messageBoxOverlay.style.opacity = '0';
+                    messageBoxOverlay.addEventListener('transitionend', () => messageBoxOverlay.remove(), { once: true });
+                }
+            });
+
+            // Trigger fade-in
+            setTimeout(() => {
+                messageBoxOverlay.style.opacity = '1';
+            }, 10);
+        }
+
+        /**
+         * Updates the visibility of upgrade sections based on the current stage.
+         */
+        function updateStageVisibility() {
+            elements.stageDisplay.textContent = stageInfo[currentStage].title;
+
+            // Hide all upgrade cards initially
+            for (const upgradeId in upgradesConfig) {
+                const upgradeCard = elements[`upgrade-card-${upgradeId}`];
+                if (upgradeCard) {
+                    upgradeCard.classList.add('hidden');
+                }
+            }
+
+            // Show upgrades based on current stage and maxed status
+            for (let i = 0; i <= currentStage; i++) { // Iterate through all past and current stages
+                const stageData = stageInfo[i];
+                if (stageData && stageData.upgradesUnlockedAtStage) {
+                    stageData.upgradesUnlockedAtStage.forEach(upgradeId => {
+                        const upgradeCard = elements[`upgrade-card-${upgradeId}`];
+                        if (upgradeCard && !maxedOutUpgradesSet.has(upgradeId)) {
+                            upgradeCard.classList.remove('hidden');
+                            updateUpgradeUI(upgradeId, upgradesConfig[upgradeId]); // Update UI of visible cards
+                        } else if (upgradeCard && maxedOutUpgradesSet.has(upgradeId)) {
+                            // If an upgrade is maxed, ensure it's removed from the DOM here on refresh/load
+                            if(upgradeCard.parentNode) { // Check if it's still in the DOM
+                                upgradeCard.remove();
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        /**
+         * Updates the "Unlock Next Stage" button visibility and disabled state.
+         */
+        function updateUnlockNextStageButton() {
+            const nextStageNum = currentStage + 1;
+            if (nextStageNum <= numStages) {
+                const nextStage = stageInfo[nextStageNum];
+                const threshold = nextStage.unlockThreshold;
+                const metFps = totalFPSDownloaded >= threshold.totalFps;
+                
+                if (metFps) { 
+                    elements.unlockNextStageButton.classList.remove('hidden');
+                    elements.unlockNextStageButton.disabled = false;
+                    elements.unlockNextStageButton.textContent = `Unlock ${nextStage.title}!`;
+                    elements.unlockNextStageButton.classList.remove('disabled-btn');
+                } else {
+                    elements.unlockNextStageButton.classList.remove('hidden'); 
+                    elements.unlockNextStageButton.disabled = true;
+                    let reqText = [];
+                    if (!metFps) {
+                        reqText.push(`FPS: ${formatNumberWithCommas(totalFPSDownloaded)}/${formatNumberWithCommas(threshold.totalFps)}`); 
+                    }
+                    elements.unlockNextStageButton.textContent = `Requires ${reqText.join(', ')}`;
+                    elements.unlockNextStageButton.classList.add('disabled-btn');
+                }
+            } else {
+                elements.unlockNextStageButton.classList.add('hidden'); 
+            }
+        }
+
+        /**
+         * Generates and adds tick marks to the total FPS progress bar.
+         */
+        function setupStageTickMarks() {
+            const container = elements.stageTickMarksContainer;
+            if (!container) return; 
+
+            container.innerHTML = ''; 
+
+            for (let i = 1; i <= numStages; i++) {
+                const stageData = stageInfo[i];
+                if (stageData && stageData.unlockThreshold.totalFps > 0 && stageData.unlockThreshold.totalFps < FINAL_FPS_GOAL) {
+                    const percentage = (stageData.unlockThreshold.totalFps / FINAL_FPS_GOAL) * 100;
+                    const tickMark = document.createElement('div');
+                    tickMark.className = 'stage-tick-mark';
+                    tickMark.style.left = `${percentage}%`;
+                    container.appendChild(tickMark);
+                }
+            }
+        }
+
+
+        /**
+         * Game loop for passive progress generation and market updates.
+         */
+        function gameLoop() {
+            if (fpsPerSecondCurrent > 0) {
+                progressDownload(fpsPerSecondCurrent / 10); 
+            }
+            updateMarketPrice(); 
+            updateUI(); 
+        }
+
+        /**
+         * Function to instantly provide resources for testing.
+         */
+        function handleTestButtonClick() {
+            totalFPSDownloaded += 10000; 
+            currentFPS += 10000; 
+            money += 5000; 
+            
+            recalculateStats();
+            updateUI();
+            saveGame();
+            console.log("Added resources for testing!");
+        }
+
+        /**
+         * Saves the current game state to local storage.
+         */
+        function saveGame() {
+            const upgradeLevels = {};
+            for (const id in upgradesConfig) {
+                upgradeLevels[id] = upgradesConfig[id].level;
+            }
+
+            const gameData = {
+                currentFPS,
+                totalFPSDownloaded,
+                downloadProgress,
+                finalAchievementUnlocked,
+                money, 
+                fpsMarketPrice,
+                currentStage, 
+                upgradeLevels, 
+                maxedOutUpgrades: Array.from(maxedOutUpgradesSet) 
+            };
+            localStorage.setItem('downloadMoreFPSGame', JSON.stringify(gameData));
+        }
+
+        /**
+         * Loads the game state from local storage.
+         */
+        function loadGame() {
+            const savedData = localStorage.getItem('downloadMoreFPSGame');
+            if (savedData) {
+                const gameData = JSON.parse(savedData);
+                currentFPS = gameData.currentFPS || 0;
+                totalFPSDownloaded = gameData.totalFPSDownloaded || 0;
+                downloadProgress = gameData.downloadProgress || 0;
+                finalAchievementUnlocked = gameData.finalAchievementUnlocked || false;
+                money = gameData.money || 0; 
+                fpsMarketPrice = gameData.fpsMarketPrice || 1.00; 
+                currentStage = gameData.currentStage || 0; 
+
+                // Load all upgrade levels
+                if (gameData.upgradeLevels) {
+                    for (const id in upgradesConfig) { 
+                        if (gameData.upgradeLevels[id] !== undefined) {
+                            upgradesConfig[id].level = gameData.upgradeLevels[id];
+                        }
+                    }
+                }
+                
+                // Load maxed out upgrades
+                maxedOutUpgradesSet = new Set(gameData.maxedOutUpgrades || []);
+
+                recalculateStats(); 
+                updateUI();
+                console.log("Game loaded!");
+            } else {
+                console.log("No saved game found, starting new game.");
+                recalculateStats(); 
+                updateUI(); 
+            }
+        }
+
+        /**
+         * Resets the game to its initial state.
+         */
+        function resetGame() {
+            const confirmationBoxOverlay = document.createElement('div');
+            confirmationBoxOverlay.className = 'message-box-overlay';
+            const confirmationBoxContent = document.createElement('div');
+            confirmationBoxContent.className = 'message-box-content';
+            confirmationBoxOverlay.appendChild(confirmationBoxContent);
+
+            confirmationBoxContent.innerHTML = `
+                <p class="mb-3 text-lg">Are you sure you want to reset the game? This cannot be undone</p>
+                <button id="confirm-reset" class="btn-upgrade !bg-red-600 hover:!bg-red-700 mx-2">Yes, Reset</button>
+                <button id="cancel-reset" class="btn-upgrade !bg-gray-600 hover:!bg-gray-700 mx-2">Cancel</button>
+            `;
+            document.body.appendChild(confirmationBoxOverlay);
+
+            document.getElementById('confirm-reset').addEventListener('click', () => {
+                currentFPS = 0;
+                totalFPSDownloaded = 0;
+                downloadProgress = 0;
+                finalAchievementUnlocked = false;
+                money = 0; 
+                fpsMarketPrice = 1.00; 
+                currentStage = 0; 
+                maxedOutUpgradesSet.clear(); 
+
+                for (const id in upgradesConfig) {
+                    upgradesConfig[id].level = 0;
+                }
+
+                localStorage.removeItem('downloadMoreFPSGame');
+                console.log("Game reset!");
+                recalculateStats(); 
+                updateUI();
+                confirmationBoxOverlay.remove(); 
+            });
+
+            document.getElementById('cancel-reset').addEventListener('click', () => {
+                confirmationBoxOverlay.remove(); 
+            });
+        }
+
+        /**
+         * Shares the game results.
+         */
+        function shareGameResults() {
+            const shareText = `Stage: ${stageEmojis[currentStage]}\n${formatNumberWithCommas(Math.floor(totalFPSDownloaded))} FPS\nDownloadMoreFPS.com`; 
+            
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = shareText;
+            document.body.appendChild(tempTextArea);
+            
+            tempTextArea.select();
+            document.execCommand('copy');
+            
+            document.body.removeChild(tempTextArea);
+
+            const messageBox = document.createElement('div');
+            messageBox.className = 'clipboard-message';
+            messageBox.textContent = 'Copied to clipboard!';
+            elements.gameContainer.appendChild(messageBox); 
+
+            // Position and show message (relative to game container)
+            const gameRect = elements.gameContainer.getBoundingClientRect();
+            messageBox.style.left = `${gameRect.width / 2}px`;
+            messageBox.style.top = `${gameRect.height / 2}px`;
+
+
+            setTimeout(() => {
+                messageBox.classList.add('show');
+            }, 10); 
+
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+                setTimeout(() => {
+                    messageBox.remove();
+                }, 300); 
+            }, 1500); 
+        }
+
+        // --- Initialization ---
+        window.onload = function() {
+            // Populate the 'elements' object with all DOM references
+            elements.moneyDisplay = document.getElementById('money-display'); 
+            elements.fpsMarketPriceDisplay = document.getElementById('fps-market-price-display'); 
+            elements.downloadButton = document.getElementById('download-button');
+            elements.sellFpsButton = document.getElementById('sell-fps-button'); 
+
+            elements.downloadProgressFill = document.getElementById('download-progress-fill');
+            elements.downloadProgressText = document.getElementById('download-progress-text');
+
+            elements.totalFpsProgressFill = document.getElementById('total-fps-progress-fill');
+            elements.totalFpsProgressText = document.getElementById('total-fps-progress-text');
+            elements.finalAchievementDisplay = document.getElementById('final-achievement-display');
+            elements.stageTickMarksContainer = document.getElementById('stage-tick-marks-container'); 
+
+            // Assign elements for each upgrade dynamically
+            for (const upgradeId in upgradesConfig) {
+                elements[`${upgradeId}-cost`] = document.getElementById(`${upgradeId}-cost`);
+                elements[`buy-${upgradeId}`] = document.getElementById(`buy-${upgradeId}`);
+                elements[`${upgradeId}-level`] = document.getElementById(`${upgradeId}-level`);
+                elements[`upgrade-card-${upgradeId}`] = document.getElementById(`upgrade-card-${upgradeId}`);
+            }
+
+            elements.resetButton = document.getElementById('reset-game');
+            elements.testButton = document.getElementById('test-button'); 
+            elements.gameContainer = document.getElementById('game');
+            elements.shareButton = document.getElementById('share-button'); 
+            elements.infoButton = document.getElementById('info-button'); // New info button
+            elements.stageDisplay = document.getElementById('stage-display');
+            elements.unlockNextStageButton = document.getElementById('unlock-next-stage-button');
+
+            elements.upgradeSectionsContainer = document.getElementById('upgrade-sections-container');
+            
+            // Attach event listeners
+            elements.downloadButton.addEventListener('click', (event) => progressDownload(fpsPerClickCurrent, event));
+            elements.sellFpsButton.addEventListener('click', sellFPS); 
+
+            // Attach listeners for all buy upgrade buttons dynamically
+            for (const upgradeId in upgradesConfig) {
+                // Check if the buy button actually exists in the DOM before adding listener
+                if (elements[`buy-${upgradeId}`]) {
+                    elements[`buy-${upgradeId}`].addEventListener('click', () => buyUpgrade(upgradeId));
+                }
+            }
+            
+            elements.resetButton.addEventListener('click', resetGame);
+            elements.shareButton.addEventListener('click', shareGameResults); 
+            elements.infoButton.addEventListener('click', showGameInfoMessage); // New info button listener
+            elements.unlockNextStageButton.addEventListener('click', unlockNextStage);
+            
+            // The test button itself is hidden in HTML, but its function is global for console access
+            // elements.testButton.addEventListener('click', handleTestButtonClick); // Removed as button is hidden
+
+            loadGame(); 
+            setupStageTickMarks(); 
+            setInterval(gameLoop, 100); 
+            setInterval(saveGame, 5000);
+
+            // Log instructions for calling the test function in the console
+            console.log("To add resources for testing, type this in the console: handleTestButtonClick()");
+        }
+
+        // Handle visibility change to prevent offline progress accumulation errors
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                saveGame();
+            } else {
+                loadGame(); 
+            }
+        });
+    </script>
+</body>
+</html>
