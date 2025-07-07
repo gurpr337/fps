@@ -22,6 +22,7 @@
             --accent-teal: #00CED1; /* Plasma Teal */
             --accent-teal-hover: #00B2B5; /* Slightly darker teal */
             --accent-yellow: #FFD700; /* Cyber Yellow */
+            --accent-brown: #8B4513; /* Brown for Minecraft dirt blocks */
             --btn-disabled: #3A425F; /* Muted Blue-Grey for disabled elements and some backgrounds */
         }
 
@@ -495,6 +496,151 @@
             transform: translate(-50%, calc(-50% - 15px)); /* Move up by 15px on show */
         }
 
+        /* Stage Graphics Container Styles */
+        .stage-graphics-container {
+            background-color: var(--bg-secondary);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+        
+        .stage-graphics-svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.1));
+        }
+        
+        .stage-graphics-layer {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .stage-graphics-layer.hidden {
+            opacity: 0;
+            display: none;
+        }
+        
+        /* Stage-specific graphics styles */
+        .computer-case {
+            filter: drop-shadow(0 0 5px var(--accent-teal));
+        }
+        
+        .gpu-card {
+            filter: drop-shadow(0 0 3px var(--accent-green));
+        }
+        
+        .cpu-fan {
+            filter: drop-shadow(0 0 3px var(--accent-purple));
+        }
+        
+        .liquid-tube {
+            filter: drop-shadow(0 0 3px var(--accent-teal));
+        }
+        
+        .rgb-strip {
+            filter: drop-shadow(0 0 3px currentColor);
+        }
+        
+        .quantum-particle {
+            filter: drop-shadow(0 0 3px var(--accent-purple));
+        }
+        
+        .neural-node {
+            filter: drop-shadow(0 0 2px var(--accent-purple));
+        }
+        
+        .gravity-lens {
+            filter: drop-shadow(0 0 5px var(--accent-yellow));
+        }
+        
+        .dark-matter-wisp {
+            filter: drop-shadow(0 0 4px var(--accent-purple));
+        }
+        
+        .electron-orbit {
+            filter: drop-shadow(0 0 2px currentColor);
+        }
+        
+        .nucleus {
+            filter: drop-shadow(0 0 3px var(--accent-yellow));
+        }
+        
+        .universe-window {
+            filter: drop-shadow(0 0 4px currentColor);
+        }
+        
+        .portal {
+            filter: drop-shadow(0 0 5px var(--accent-yellow));
+        }
+        
+        .clock-face {
+            filter: drop-shadow(0 0 3px var(--accent-teal));
+        }
+        
+        .galaxy-background {
+            filter: blur(0.5px);
+        }
+        
+        .quantum-processor {
+            filter: drop-shadow(0 0 6px var(--accent-yellow));
+        }
+        
+        .cosmic-thread {
+            filter: drop-shadow(0 0 2px currentColor);
+        }
+        
+        .singularity {
+            filter: drop-shadow(0 0 8px var(--accent-yellow));
+        }
+        
+        .event-horizon {
+            filter: drop-shadow(0 0 4px var(--accent-yellow));
+        }
+        
+        .minecraft-block {
+            filter: drop-shadow(0 0 3px var(--accent-yellow));
+        }
+        
+        .ray-trace-reflection {
+            filter: drop-shadow(0 0 4px var(--accent-yellow));
+        }
+        
+        .minecraft-text {
+            filter: drop-shadow(0 0 5px var(--accent-yellow));
+        }
+        
+        .minecraft-block.dirt {
+            fill: var(--accent-brown);
+        }
+        
+        /* Responsive adjustments for stage graphics */
+        @media (max-width: 768px) {
+            .stage-graphics-container {
+                padding: 0.5rem;
+                min-height: 150px;
+            }
+            
+            .stage-graphics-svg {
+                max-width: 350px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stage-graphics-container {
+                min-height: 120px;
+            }
+            
+            .stage-graphics-svg {
+                max-width: 300px;
+            }
+        }
+
         /* Styles for the stage tick marks on the total FPS bar */
         .stage-tick-marks-container {
             position: absolute;
@@ -549,6 +695,323 @@
             </div>
         </div>
         
+        <!-- Stage Graphics Container -->
+        <div id="stage-graphics-container" class="stage-graphics-container">
+            <svg id="stage-graphics-svg" viewBox="0 0 400 300" class="stage-graphics-svg">
+                <!-- Stage 0: Basic Computer Case -->
+                <g id="stage-0-graphics" class="stage-graphics-layer">
+                    <rect x="150" y="200" width="100" height="80" fill="none" stroke="var(--accent-teal)" stroke-width="2" rx="4" class="computer-case"/>
+                    <text x="200" y="250" text-anchor="middle" fill="var(--accent-teal)" font-size="10" class="stage-label">Initializing...</text>
+                </g>
+                
+                <!-- Stage 1: GPU Card -->
+                <g id="stage-1-graphics" class="stage-graphics-layer hidden">
+                    <rect x="160" y="220" width="80" height="15" fill="var(--accent-green)" rx="2" class="gpu-card"/>
+                    <circle cx="165" cy="227" r="2" fill="var(--accent-yellow)" class="gpu-led"/>
+                    <text x="200" y="232" text-anchor="middle" fill="var(--accent-green)" font-size="8">GPU</text>
+                </g>
+                
+                <!-- Stage 2: CPU Cooler -->
+                <g id="stage-2-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="200" cy="210" r="12" fill="none" stroke="var(--accent-purple)" stroke-width="2" class="cpu-cooler"/>
+                    <circle cx="200" cy="210" r="8" fill="var(--accent-purple)" opacity="0.3" class="cpu-fan">
+                        <animateTransform attributeName="transform" type="rotate" values="0 200 210;360 200 210" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                    <line x1="194" y1="210" x2="206" y2="210" stroke="var(--accent-purple)" stroke-width="1"/>
+                    <line x1="200" y1="204" x2="200" y2="216" stroke="var(--accent-purple)" stroke-width="1"/>
+                </g>
+                
+                <!-- Stage 3: Liquid Cooling -->
+                <g id="stage-3-graphics" class="stage-graphics-layer hidden">
+                    <path d="M 180 200 Q 170 190 160 200 Q 150 210 160 220 Q 170 230 180 220" 
+                          fill="none" stroke="var(--accent-teal)" stroke-width="3" class="liquid-tube"/>
+                    <circle cx="165" cy="205" r="2" fill="var(--accent-teal)" class="liquid-particle">
+                        <animateMotion dur="2s" repeatCount="indefinite">
+                            <mpath href="#liquid-path"/>
+                        </animateMotion>
+                    </circle>
+                    <path id="liquid-path" d="M 180 200 Q 170 190 160 200 Q 150 210 160 220 Q 170 230 180 220" fill="none"/>
+                </g>
+                
+                <!-- Stage 4: SSD -->
+                <g id="stage-4-graphics" class="stage-graphics-layer hidden">
+                    <rect x="220" y="250" width="25" height="8" fill="var(--accent-yellow)" rx="1" class="ssd"/>
+                    <circle cx="240" cy="254" r="1" fill="var(--accent-green)" class="ssd-led">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="0.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="232" y="262" text-anchor="middle" fill="var(--accent-yellow)" font-size="6">SSD</text>
+                </g>
+                
+                <!-- Stage 5: RAM with RGB -->
+                <g id="stage-5-graphics" class="stage-graphics-layer hidden">
+                    <rect x="175" y="185" width="8" height="30" fill="var(--accent-green)" rx="1" class="ram-stick"/>
+                    <rect x="185" y="185" width="8" height="30" fill="var(--accent-green)" rx="1" class="ram-stick"/>
+                    <rect x="195" y="185" width="8" height="30" fill="var(--accent-green)" rx="1" class="ram-stick"/>
+                    <rect x="205" y="185" width="8" height="30" fill="var(--accent-green)" rx="1" class="ram-stick"/>
+                    <rect x="175" y="185" width="38" height="4" class="rgb-strip">
+                        <animate attributeName="fill" values="var(--accent-green);var(--accent-purple);var(--accent-teal);var(--accent-yellow);var(--accent-green)" 
+                                 dur="2s" repeatCount="indefinite"/>
+                    </rect>
+                </g>
+                
+                <!-- Stage 6: Network Cable -->
+                <g id="stage-6-graphics" class="stage-graphics-layer hidden">
+                    <path d="M 250 240 Q 280 230 310 240 Q 340 250 370 240" 
+                          fill="none" stroke="var(--accent-teal)" stroke-width="2" class="network-cable"/>
+                    <circle cx="250" cy="240" r="2" fill="var(--accent-green)" class="data-packet">
+                        <animateMotion dur="1.5s" repeatCount="indefinite">
+                            <mpath href="#network-path"/>
+                        </animateMotion>
+                    </circle>
+                    <path id="network-path" d="M 250 240 Q 280 230 310 240 Q 340 250 370 240" fill="none"/>
+                </g>
+                
+                <!-- Stage 7: Quantum Entanglement -->
+                <g id="stage-7-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="120" cy="150" r="3" fill="var(--accent-purple)" class="quantum-particle">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="280" cy="150" r="3" fill="var(--accent-purple)" class="quantum-particle">
+                        <animate attributeName="opacity" values="1;0.5;1" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                    <line x1="120" y1="150" x2="280" y2="150" stroke="var(--accent-purple)" stroke-width="1" opacity="0.5" class="entanglement-line">
+                        <animate attributeName="opacity" values="0.2;0.8;0.2" dur="1s" repeatCount="indefinite"/>
+                    </line>
+                </g>
+                
+                <!-- Stage 8: Virtual Machines -->
+                <g id="stage-8-graphics" class="stage-graphics-layer hidden">
+                    <rect x="80" y="80" width="40" height="30" fill="none" stroke="var(--accent-green)" stroke-width="1" rx="2" class="vm-window">
+                        <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="130" y="60" width="40" height="30" fill="none" stroke="var(--accent-purple)" stroke-width="1" rx="2" class="vm-window">
+                        <animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="280" y="70" width="40" height="30" fill="none" stroke="var(--accent-yellow)" stroke-width="1" rx="2" class="vm-window">
+                        <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+                    </rect>
+                    <text x="100" y="97" text-anchor="middle" fill="var(--accent-green)" font-size="6">VM1</text>
+                    <text x="150" y="77" text-anchor="middle" fill="var(--accent-purple)" font-size="6">VM2</text>
+                    <text x="300" y="87" text-anchor="middle" fill="var(--accent-yellow)" font-size="6">VM3</text>
+                </g>
+                
+                <!-- Stage 9: Computing Grid -->
+                <g id="stage-9-graphics" class="stage-graphics-layer hidden">
+                    <g class="computing-grid">
+                        <line x1="50" y1="50" x2="350" y2="50" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="50" y1="100" x2="350" y2="100" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="50" y1="150" x2="350" y2="150" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="50" y1="200" x2="350" y2="200" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="50" y1="250" x2="350" y2="250" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="50" y1="50" x2="50" y2="250" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="150" y1="50" x2="150" y2="250" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="250" y1="50" x2="250" y2="250" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <line x1="350" y1="50" x2="350" y2="250" stroke="var(--accent-teal)" stroke-width="0.5" opacity="0.5"/>
+                        <circle cx="100" cy="100" r="2" fill="var(--accent-green)" class="grid-node">
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="200" cy="150" r="2" fill="var(--accent-green)" class="grid-node">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="300" cy="200" r="2" fill="var(--accent-green)" class="grid-node">
+                            <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                </g>
+                
+                <!-- Stage 10: Neural Network -->
+                <g id="stage-10-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="100" cy="120" r="4" fill="var(--accent-purple)" class="neural-node"/>
+                    <circle cx="180" cy="100" r="4" fill="var(--accent-purple)" class="neural-node"/>
+                    <circle cx="180" cy="140" r="4" fill="var(--accent-purple)" class="neural-node"/>
+                    <circle cx="260" cy="110" r="4" fill="var(--accent-purple)" class="neural-node"/>
+                    <circle cx="300" cy="120" r="4" fill="var(--accent-purple)" class="neural-node"/>
+                    <line x1="100" y1="120" x2="180" y2="100" stroke="var(--accent-purple)" stroke-width="1" opacity="0.6"/>
+                    <line x1="100" y1="120" x2="180" y2="140" stroke="var(--accent-purple)" stroke-width="1" opacity="0.6"/>
+                    <line x1="180" y1="100" x2="260" y2="110" stroke="var(--accent-purple)" stroke-width="1" opacity="0.6"/>
+                    <line x1="180" y1="140" x2="260" y2="110" stroke="var(--accent-purple)" stroke-width="1" opacity="0.6"/>
+                    <line x1="260" y1="110" x2="300" y2="120" stroke="var(--accent-purple)" stroke-width="1" opacity="0.6"/>
+                    <g class="neural-activity">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                    </g>
+                </g>
+                
+                <!-- Stage 11: Gravitational Lens -->
+                <g id="stage-11-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="200" cy="150" r="60" fill="none" stroke="var(--accent-yellow)" stroke-width="2" opacity="0.5" class="gravity-lens">
+                        <animate attributeName="r" values="60;65;60" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="200" cy="150" r="40" fill="none" stroke="var(--accent-yellow)" stroke-width="1" opacity="0.3" class="gravity-lens">
+                        <animate attributeName="r" values="40;45;40" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <g class="distortion-effect" transform="translate(200,150)">
+                        <animate attributeName="transform" values="translate(200,150) scale(1);translate(200,150) scale(1.05);translate(200,150) scale(1)" dur="3s" repeatCount="indefinite"/>
+                    </g>
+                </g>
+                
+                <!-- Stage 12: Dark Matter Cooling -->
+                <g id="stage-12-graphics" class="stage-graphics-layer hidden">
+                    <path d="M 120 180 Q 140 160 160 180 Q 180 200 200 180 Q 220 160 240 180 Q 260 200 280 180" 
+                          fill="none" stroke="var(--accent-purple)" stroke-width="2" opacity="0.7" class="dark-matter-wisp">
+                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <circle cx="150" cy="170" r="2" fill="var(--accent-purple)" class="dark-matter-particle">
+                        <animate attributeName="cy" values="170;175;170" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="220" cy="175" r="2" fill="var(--accent-purple)" class="dark-matter-particle">
+                        <animate attributeName="cy" values="175;170;175" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                </g>
+                
+                <!-- Stage 13: Sub-Atomic Particles -->
+                <g id="stage-13-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="200" cy="150" r="20" fill="none" stroke="var(--accent-green)" stroke-width="1" opacity="0.5" class="electron-orbit">
+                        <animateTransform attributeName="transform" type="rotate" values="0 200 150;360 200 150" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="200" cy="150" r="15" fill="none" stroke="var(--accent-teal)" stroke-width="1" opacity="0.5" class="electron-orbit">
+                        <animateTransform attributeName="transform" type="rotate" values="0 200 150;-360 200 150" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="200" cy="150" r="3" fill="var(--accent-yellow)" class="nucleus"/>
+                    <circle cx="220" cy="150" r="2" fill="var(--accent-green)" class="electron">
+                        <animateTransform attributeName="transform" type="rotate" values="0 200 150;360 200 150" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="215" cy="150" r="1.5" fill="var(--accent-teal)" class="electron">
+                        <animateTransform attributeName="transform" type="rotate" values="0 200 150;-360 200 150" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                </g>
+                
+                <!-- Stage 14: Parallel Universe Windows -->
+                <g id="stage-14-graphics" class="stage-graphics-layer hidden">
+                    <rect x="50" y="50" width="80" height="60" fill="none" stroke="var(--accent-green)" stroke-width="2" rx="5" class="universe-window">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="270" y="80" width="80" height="60" fill="none" stroke="var(--accent-purple)" stroke-width="2" rx="5" class="universe-window">
+                        <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="160" y="30" width="80" height="60" fill="none" stroke="var(--accent-teal)" stroke-width="2" rx="5" class="universe-window">
+                        <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+                    </rect>
+                    <text x="90" y="85" text-anchor="middle" fill="var(--accent-green)" font-size="8">Universe A</text>
+                    <text x="310" y="115" text-anchor="middle" fill="var(--accent-purple)" font-size="8">Universe B</text>
+                    <text x="200" y="65" text-anchor="middle" fill="var(--accent-teal)" font-size="8">Universe C</text>
+                </g>
+                
+                <!-- Stage 15: Interdimensional Portals -->
+                <g id="stage-15-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="100" cy="100" r="15" fill="none" stroke="var(--accent-yellow)" stroke-width="3" class="portal">
+                        <animate attributeName="r" values="15;18;15" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="300" cy="200" r="15" fill="none" stroke="var(--accent-yellow)" stroke-width="3" class="portal">
+                        <animate attributeName="r" values="18;15;18" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <path d="M 100 100 Q 200 50 300 200" fill="none" stroke="var(--accent-yellow)" stroke-width="2" opacity="0.5" class="portal-connection">
+                        <animate attributeName="opacity" values="0.2;0.8;0.2" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+                
+                <!-- Stage 16: Time Distortion -->
+                <g id="stage-16-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="320" cy="80" r="20" fill="none" stroke="var(--accent-teal)" stroke-width="2" class="clock-face"/>
+                    <line x1="320" y1="80" x2="320" y2="70" stroke="var(--accent-teal)" stroke-width="2" class="clock-hand-hour">
+                        <animateTransform attributeName="transform" type="rotate" values="0 320 80;360 320 80" dur="10s" repeatCount="indefinite"/>
+                    </line>
+                    <line x1="320" y1="80" x2="320" y2="65" stroke="var(--accent-teal)" stroke-width="1" class="clock-hand-minute">
+                        <animateTransform attributeName="transform" type="rotate" values="0 320 80;360 320 80" dur="1s" repeatCount="indefinite"/>
+                    </line>
+                    <text x="320" y="115" text-anchor="middle" fill="var(--accent-teal)" font-size="8">Time Flux</text>
+                </g>
+                
+                <!-- Stage 17: Astro-Quantum Processor -->
+                <g id="stage-17-graphics" class="stage-graphics-layer hidden">
+                    <rect x="0" y="0" width="400" height="300" fill="url(#galaxyGradient)" opacity="0.3" class="galaxy-background"/>
+                    <defs>
+                        <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                            <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                        </radialGradient>
+                    </defs>
+                    <circle cx="200" cy="150" r="8" fill="var(--accent-yellow)" class="quantum-processor">
+                        <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="200" y="170" text-anchor="middle" fill="var(--accent-yellow)" font-size="8">Astro-Quantum</text>
+                </g>
+                
+                <!-- Stage 18: Cosmic Threads -->
+                <g id="stage-18-graphics" class="stage-graphics-layer hidden">
+                    <path d="M 0 50 Q 100 0 200 50 Q 300 100 400 50" fill="none" stroke="var(--accent-teal)" stroke-width="1" opacity="0.6" class="cosmic-thread">
+                        <animate attributeName="opacity" values="0.3;0.9;0.3" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 0 150 Q 100 100 200 150 Q 300 200 400 150" fill="none" stroke="var(--accent-purple)" stroke-width="1" opacity="0.6" class="cosmic-thread">
+                        <animate attributeName="opacity" values="0.6;0.3;0.6" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 0 250 Q 100 200 200 250 Q 300 300 400 250" fill="none" stroke="var(--accent-green)" stroke-width="1" opacity="0.6" class="cosmic-thread">
+                        <animate attributeName="opacity" values="0.9;0.3;0.9" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+                
+                <!-- Stage 19: Singularity -->
+                <g id="stage-19-graphics" class="stage-graphics-layer hidden">
+                    <circle cx="200" cy="150" r="5" fill="var(--accent-yellow)" class="singularity">
+                        <animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="200" cy="150" r="30" fill="none" stroke="var(--accent-yellow)" stroke-width="2" opacity="0.5" class="event-horizon">
+                        <animate attributeName="r" values="30;35;30" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <g class="matter-being-pulled">
+                        <circle cx="150" cy="100" r="2" fill="var(--accent-green)" class="matter-particle">
+                            <animateMotion dur="3s" repeatCount="indefinite">
+                                <mpath href="#spiral-path"/>
+                            </animateMotion>
+                        </circle>
+                        <circle cx="250" cy="200" r="2" fill="var(--accent-purple)" class="matter-particle">
+                            <animateMotion dur="3s" repeatCount="indefinite" begin="1s">
+                                <mpath href="#spiral-path2"/>
+                            </animateMotion>
+                        </circle>
+                    </g>
+                    <path id="spiral-path" d="M 150 100 Q 175 125 200 150" fill="none"/>
+                    <path id="spiral-path2" d="M 250 200 Q 225 175 200 150" fill="none"/>
+                </g>
+                
+                <!-- Stage 20: Minecraft Ray Tracing -->
+                <g id="stage-20-graphics" class="stage-graphics-layer hidden">
+                    <g class="minecraft-blocks">
+                        <rect x="180" y="130" width="20" height="20" fill="var(--accent-green)" stroke="var(--accent-yellow)" stroke-width="1" class="minecraft-block grass"/>
+                        <rect x="200" y="130" width="20" height="20" fill="var(--accent-brown)" stroke="var(--accent-yellow)" stroke-width="1" class="minecraft-block dirt"/>
+                        <rect x="180" y="150" width="20" height="20" fill="var(--accent-brown)" stroke="var(--accent-yellow)" stroke-width="1" class="minecraft-block dirt"/>
+                        <rect x="200" y="150" width="20" height="20" fill="var(--accent-brown)" stroke="var(--accent-yellow)" stroke-width="1" class="minecraft-block dirt"/>
+                        
+                        <!-- Ray tracing reflections -->
+                        <line x1="190" y1="130" x2="170" y2="110" stroke="var(--accent-yellow)" stroke-width="2" opacity="0.7" class="ray-trace-reflection">
+                            <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="210" y1="130" x2="230" y2="110" stroke="var(--accent-yellow)" stroke-width="2" opacity="0.7" class="ray-trace-reflection">
+                            <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                        </line>
+                        <line x1="190" y1="150" x2="160" y2="170" stroke="var(--accent-yellow)" stroke-width="2" opacity="0.7" class="ray-trace-reflection">
+                            <animate attributeName="opacity" values="0.7;0.9;0.7" dur="2s" repeatCount="indefinite" begin="1s"/>
+                        </line>
+                        <line x1="210" y1="150" x2="240" y2="170" stroke="var(--accent-yellow)" stroke-width="2" opacity="0.7" class="ray-trace-reflection">
+                            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2s" repeatCount="indefinite" begin="1.5s"/>
+                        </line>
+                        
+                        <!-- Perfect reflections on block surfaces -->
+                        <rect x="182" y="132" width="16" height="16" fill="none" stroke="var(--accent-yellow)" stroke-width="0.5" opacity="0.5" class="reflection-highlight">
+                            <animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite"/>
+                        </rect>
+                        <rect x="202" y="132" width="16" height="16" fill="none" stroke="var(--accent-yellow)" stroke-width="0.5" opacity="0.5" class="reflection-highlight">
+                            <animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite"/>
+                        </rect>
+                    </g>
+                    
+                    <text x="200" y="190" text-anchor="middle" fill="var(--accent-yellow)" font-size="12" font-weight="bold" class="minecraft-text">
+                        RAY TRACING ENABLED!
+                        <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+                    </text>
+                </g>
+            </svg>
+        </div>
+
         <!-- Stage Information and Unlock Button -->
         <div class="stage-info-container text-center mb-2">
             <h2 id="stage-display" class="text-xl font-bold text-accent-teal">Pre-Stage: Initializing Core Drivers</h2>
@@ -1010,6 +1473,54 @@
 
         // --- DOM Elements (populated in window.onload) ---
         const elements = {};
+        
+        // --- Stage Graphics Management ---
+        /**
+         * Updates the stage graphics display based on current stage
+         */
+        function updateStageGraphics() {
+            // Show all graphics up to and including the current stage
+            for (let i = 0; i <= currentStage; i++) {
+                const graphicsElement = document.getElementById(`stage-${i}-graphics`);
+                if (graphicsElement) {
+                    graphicsElement.classList.remove('hidden');
+                }
+            }
+            
+            // Hide graphics for stages not yet unlocked
+            for (let i = currentStage + 1; i <= 20; i++) {
+                const graphicsElement = document.getElementById(`stage-${i}-graphics`);
+                if (graphicsElement) {
+                    graphicsElement.classList.add('hidden');
+                }
+            }
+        }
+        
+        /**
+         * Plays a special animation when a new stage is unlocked
+         */
+        function playStageUnlockAnimation(stageNumber) {
+            const graphicsElement = document.getElementById(`stage-${stageNumber}-graphics`);
+            if (graphicsElement) {
+                // Add a special unlock animation
+                graphicsElement.style.transform = 'scale(0.8)';
+                graphicsElement.style.opacity = '0';
+                
+                // Animate in
+                setTimeout(() => {
+                    graphicsElement.style.transition = 'transform 0.6s ease-out, opacity 0.6s ease-out';
+                    graphicsElement.style.transform = 'scale(1)';
+                    graphicsElement.style.opacity = '1';
+                }, 100);
+                
+                // Reset styles after animation
+                setTimeout(() => {
+                    graphicsElement.style.transform = '';
+                    graphicsElement.style.opacity = '';
+                    graphicsElement.style.transition = '';
+                }, 700);
+            }
+        }
 
         /**
          * Formats a number with commas for every thousands place.
@@ -1207,6 +1718,9 @@
             // Update all upgrade UIs dynamically
             updateStageVisibility(); 
             
+            // Update stage graphics
+            updateStageGraphics();
+            
             elements.sellFpsButton.textContent = `Sell ${formatNumberWithCommas(currentFPS)} FPS!`; 
             elements.sellFpsButton.disabled = currentFPS <= 0;
             if (elements.sellFpsButton.disabled) {
@@ -1393,6 +1907,11 @@
                 
                 recalculateStats(); 
                 updateUI();
+                
+                // Update stage graphics and play unlock animation
+                updateStageGraphics();
+                playStageUnlockAnimation(currentStage);
+                
                 saveGame();
 
                 // Determine newly unlocked upgrades for the pop-up
@@ -1689,6 +2208,9 @@
                 recalculateStats(); 
                 updateUI(); 
             }
+            
+            // Always update graphics when loading game
+            updateStageGraphics();
         }
 
         /**
@@ -1726,6 +2248,10 @@
                 console.log("Game reset!");
                 recalculateStats(); 
                 updateUI();
+                
+                // Reset stage graphics
+                updateStageGraphics();
+                
                 confirmationBoxOverlay.remove(); 
             });
 
