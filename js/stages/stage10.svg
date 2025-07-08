@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280">
+<defs>
+                    <linearGradient id="motherboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#006400;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="gpuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#004d1a;stop-opacity:1"/>
+                    </linearGradient>
+                    <radialGradient id="fanGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                    </radialGradient>
+                    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <linearGradient id="caseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--bg-primary);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                    </radialGradient>
+                </defs>
+<g id="stage-10-graphics" class="stage-graphics-layer hidden">
+                    <!-- Quantum Chamber -->
+                    <circle cx="450" cy="140" r="30" fill="none" stroke="var(--accent-purple)" stroke-width="3" class="quantum-chamber">
+                        <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="450" cy="140" r="20" fill="none" stroke="var(--accent-purple)" stroke-width="2" opacity="0.5">
+                        <animate attributeName="r" values="20;25;20" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Quantum Core -->
+                    <circle cx="450" cy="140" r="8" fill="var(--accent-purple)" class="quantum-core">
+                        <animate attributeName="r" values="8;12;8" dur="1.5s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Quantum Particles -->
+                    <circle cx="430" cy="120" r="2" fill="var(--accent-teal)" class="quantum-particle">
+                        <animateTransform attributeName="transform" type="rotate" values="0 450 140;360 450 140" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="470" cy="160" r="2" fill="var(--accent-yellow)" class="quantum-particle">
+                        <animateTransform attributeName="transform" type="rotate" values="0 450 140;-360 450 140" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="435" cy="155" r="2" fill="var(--accent-green)" class="quantum-particle">
+                        <animateTransform attributeName="transform" type="rotate" values="0 450 140;360 450 140" dur="2.5s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="0.8s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="465" cy="125" r="2" fill="var(--accent-teal)" class="quantum-particle">
+                        <animateTransform attributeName="transform" type="rotate" values="0 450 140;-360 450 140" dur="1.8s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Connection to computer -->
+                    <path d="M 300 150 Q 350 140 420 140" fill="none" stroke="var(--accent-purple)" stroke-width="3" class="quantum-link">
+                        <animate attributeName="stroke-opacity" values="0.2;0.8;0.2" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <!-- Data flow -->
+                    <circle cx="5" cy="5" r="3" fill="var(--accent-purple)" class="quantum-data">
+                        <animateMotion dur="3s" repeatCount="indefinite">
+                            <mpath href="#quantum-path"/>
+                        </animateMotion>
+                    </circle>
+                    <path id="quantum-path" d="M 300 150 Q 350 140 420 140" fill="none" opacity="0"/>
+                    <text x="450" y="190" text-anchor="middle" fill="var(--accent-purple)" font-size="10" font-weight="bold" stroke="white" stroke-width="0.5">QUANTUM PROCESSOR</text>
+                </g>
+</svg>

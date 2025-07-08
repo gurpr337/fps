@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280">
+<defs>
+                    <linearGradient id="motherboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#006400;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="gpuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#004d1a;stop-opacity:1"/>
+                    </linearGradient>
+                    <radialGradient id="fanGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                    </radialGradient>
+                    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <linearGradient id="caseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--bg-primary);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                    </radialGradient>
+                </defs>
+<g id="stage-3-graphics" class="stage-graphics-layer hidden">
+                    <!-- M.2 SSD mounted on motherboard -->
+                    <rect x="270" y="180" width="80" height="12" fill="var(--accent-yellow)" stroke="var(--accent-yellow)" stroke-width="1" rx="2" class="ssd"/>
+                    <!-- SSD Components/Chips -->
+                    <rect x="275" y="182" width="10" height="8" fill="var(--bg-primary)" rx="1"/>
+                    <rect x="290" y="182" width="10" height="8" fill="var(--bg-primary)" rx="1"/>
+                    <rect x="305" y="182" width="10" height="8" fill="var(--bg-primary)" rx="1"/>
+                    <rect x="320" y="182" width="10" height="8" fill="var(--bg-primary)" rx="1"/>
+                    <rect x="335" y="182" width="12" height="8" fill="var(--accent-green)" rx="1"/>
+                    <!-- Activity LED -->
+                    <circle cx="341" cy="186" r="2" fill="var(--accent-green)" class="ssd-led">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="0.1s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Data Transfer Animation -->
+                    <rect x="275" y="184" width="3" height="4" fill="var(--accent-teal)" class="data-flow">
+                        <animate attributeName="x" values="275;345;275" dur="0.8s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="275" y="184" width="2" height="4" fill="var(--accent-purple)" class="data-flow">
+                        <animate attributeName="x" values="275;345;275" dur="0.8s" repeatCount="indefinite" begin="0.2s"/>
+                        <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite" begin="0.2s"/>
+                    </rect>
+                    <text x="310" y="205" text-anchor="middle" fill="var(--accent-yellow)" font-size="10" font-weight="bold" stroke="white" stroke-width="0.5">4TB NVMe SSD</text>
+                </g>
+</svg>

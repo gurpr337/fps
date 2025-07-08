@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280">
+<defs>
+                    <linearGradient id="motherboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#006400;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="gpuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#004d1a;stop-opacity:1"/>
+                    </linearGradient>
+                    <radialGradient id="fanGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                    </radialGradient>
+                    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <linearGradient id="caseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--bg-primary);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                    </radialGradient>
+                </defs>
+<g id="stage-7-graphics" class="stage-graphics-layer hidden">
+                    <!-- Monitor Stand -->
+                    <rect x="350" y="190" width="40" height="30" fill="var(--bg-primary)" stroke="var(--accent-teal)" stroke-width="2" rx="4"/>
+                    <rect x="365" y="180" width="10" height="10" fill="var(--accent-teal)" rx="2"/>
+                    <!-- Monitor Screen -->
+                    <rect x="330" y="120" width="80" height="50" fill="var(--bg-primary)" stroke="var(--accent-teal)" stroke-width="3" rx="4" class="monitor"/>
+                    <!-- Screen Content -->
+                    <rect x="335" y="125" width="70" height="40" fill="#000080" rx="2"/>
+                    <!-- Gaming content on screen -->
+                    <rect x="340" y="130" width="15" height="15" fill="var(--accent-green)" rx="1" class="game-block"/>
+                    <rect x="360" y="135" width="10" height="10" fill="var(--accent-yellow)" rx="1" class="game-block"/>
+                    <rect x="375" y="140" width="12" height="12" fill="var(--accent-purple)" rx="1" class="game-block"/>
+                    <rect x="350" y="150" width="20" height="8" fill="var(--accent-teal)" rx="1" class="game-ui"/>
+                    <!-- Monitor LEDs -->
+                    <circle cx="340" cy="175" r="2" fill="var(--accent-green)">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="350" cy="175" r="2" fill="var(--accent-blue)">
+                        <animate attributeName="opacity" values="1;0.5;1" dur="2.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Screen refresh lines -->
+                    <line x1="335" y1="130" x2="405" y2="130" stroke="var(--accent-teal)" stroke-width="1" opacity="0.3">
+                        <animate attributeName="y1" values="130;165;130" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="y2" values="130;165;130" dur="2s" repeatCount="indefinite"/>
+                    </line>
+                    <text x="370" y="235" text-anchor="middle" fill="var(--accent-teal)" font-size="10" font-weight="bold" stroke="white" stroke-width="0.5">4K GAMING MONITOR</text>
+                </g>
+</svg>

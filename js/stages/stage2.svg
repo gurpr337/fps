@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280">
+<defs>
+                    <linearGradient id="motherboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#006400;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="gpuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#004d1a;stop-opacity:1"/>
+                    </linearGradient>
+                    <radialGradient id="fanGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                    </radialGradient>
+                    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <linearGradient id="caseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--bg-primary);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                    </radialGradient>
+                </defs>
+<g id="stage-2-graphics" class="stage-graphics-layer hidden">
+                    <!-- CPU installed in socket -->
+                    <rect x="185" y="105" width="50" height="50" fill="var(--accent-yellow)" stroke="var(--accent-yellow)" stroke-width="1" rx="2"/>
+                    <rect x="190" y="110" width="40" height="40" fill="var(--bg-primary)" stroke="var(--accent-yellow)" stroke-width="1" rx="1"/>
+                    <!-- CPU Heat Spreader -->
+                    <rect x="195" y="115" width="30" height="30" fill="silver" stroke="var(--accent-teal)" stroke-width="1" rx="1"/>
+                    <!-- CPU Cooler Base -->
+                    <rect x="180" y="90" width="60" height="60" fill="url(#fanGradient)" stroke="var(--accent-purple)" stroke-width="2" rx="4" opacity="0.8"/>
+                    <!-- Heat Sink Fins -->
+                    <rect x="185" y="85" width="50" height="8" fill="var(--accent-purple)" opacity="0.7"/>
+                    <rect x="185" y="75" width="50" height="6" fill="var(--accent-purple)" opacity="0.5"/>
+                    <rect x="185" y="65" width="50" height="4" fill="var(--accent-purple)" opacity="0.3"/>
+                    <!-- CPU Fan -->
+                    <circle cx="210" cy="120" r="25" fill="none" stroke="var(--accent-purple)" stroke-width="3" class="cpu-cooler"/>
+                    <circle cx="210" cy="120" r="20" fill="url(#fanGradient)" opacity="0.6" class="cpu-fan">
+                        <animateTransform attributeName="transform" type="rotate" values="0 210 120;360 210 120" dur="0.3s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Fan Blades -->
+                    <g class="fan-blades">
+                        <line x1="190" y1="120" x2="230" y2="120" stroke="var(--accent-purple)" stroke-width="2">
+                            <animateTransform attributeName="transform" type="rotate" values="0 210 120;360 210 120" dur="0.3s" repeatCount="indefinite"/>
+                        </line>
+                        <line x1="210" y1="100" x2="210" y2="140" stroke="var(--accent-purple)" stroke-width="2">
+                            <animateTransform attributeName="transform" type="rotate" values="0 210 120;360 210 120" dur="0.3s" repeatCount="indefinite"/>
+                        </line>
+                    </g>
+</svg>

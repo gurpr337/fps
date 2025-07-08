@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280">
+<defs>
+                    <linearGradient id="motherboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#006400;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="gpuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#004d1a;stop-opacity:1"/>
+                    </linearGradient>
+                    <radialGradient id="fanGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                    </radialGradient>
+                    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <linearGradient id="caseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--bg-primary);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                    </radialGradient>
+                </defs>
+<g id="stage-8-graphics" class="stage-graphics-layer hidden">
+                    <!-- Network Router/Hub -->
+                    <rect x="80" y="60" width="80" height="40" fill="var(--bg-primary)" stroke="var(--accent-teal)" stroke-width="2" rx="4" class="network-hub"/>
+                    <!-- Network Ports -->
+                    <rect x="85" y="70" width="8" height="6" fill="var(--accent-green)" rx="1"/>
+                    <rect x="95" y="70" width="8" height="6" fill="var(--accent-green)" rx="1"/>
+                    <rect x="105" y="70" width="8" height="6" fill="var(--accent-yellow)" rx="1"/>
+                    <rect x="115" y="70" width="8" height="6" fill="var(--accent-purple)" rx="1"/>
+                    <rect x="125" y="70" width="8" height="6" fill="var(--accent-teal)" rx="1"/>
+                    <!-- Status LEDs -->
+                    <circle cx="90" cy="85" r="2" fill="var(--accent-green)">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="0.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="100" cy="85" r="2" fill="var(--accent-green)">
+                        <animate attributeName="opacity" values="1;0.3;1" dur="0.7s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="110" cy="85" r="2" fill="var(--accent-yellow)">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="0.3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="120" cy="85" r="2" fill="var(--accent-purple)">
+                        <animate attributeName="opacity" values="1;0.5;1" dur="0.6s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="130" cy="85" r="2" fill="var(--accent-teal)">
+                        <animate attributeName="opacity" values="0.7;1;0.7" dur="0.4s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Fiber cables to computer -->
+                    <path d="M 160 80 Q 180 100 200 120" fill="none" stroke="var(--accent-teal)" stroke-width="4" class="fiber-cable"/>
+                    <path d="M 160 85 Q 180 105 200 125" fill="none" stroke="var(--accent-green)" stroke-width="4" class="fiber-cable"/>
+                    <!-- Data flow particles -->
+                    <circle cx="5" cy="5" r="2" fill="var(--accent-green)" class="data-flow">
+                        <animateMotion dur="2s" repeatCount="indefinite">
+                            <mpath href="#fiber-path1"/>
+                        </animateMotion>
+                    </circle>
+                    <circle cx="5" cy="5" r="2" fill="var(--accent-teal)" class="data-flow">
+                        <animateMotion dur="2s" repeatCount="indefinite" begin="0.5s">
+                            <mpath href="#fiber-path2"/>
+                        </animateMotion>
+                    </circle>
+                    <path id="fiber-path1" d="M 160 80 Q 180 100 200 120" fill="none" opacity="0"/>
+                    <path id="fiber-path2" d="M 160 85 Q 180 105 200 125" fill="none" opacity="0"/>
+                    <text x="120" y="115" text-anchor="middle" fill="var(--accent-teal)" font-size="10" font-weight="bold" stroke="white" stroke-width="0.5">FIBER NETWORK</text>
+                </g>
+</svg>

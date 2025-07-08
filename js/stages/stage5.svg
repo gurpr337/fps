@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280">
+<defs>
+                    <linearGradient id="motherboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#006400;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="gpuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#004d1a;stop-opacity:1"/>
+                    </linearGradient>
+                    <radialGradient id="fanGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                    </radialGradient>
+                    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <linearGradient id="caseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--bg-primary);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                    </radialGradient>
+                </defs>
+<g id="stage-5-graphics" class="stage-graphics-layer hidden">
+                    <!-- RAM Stick 1 in slot 1 -->
+                    <rect x="300" y="72" width="10" height="76" fill="var(--bg-primary)" stroke="var(--accent-green)" stroke-width="2" rx="2" class="ram-stick"/>
+                    <rect x="301" y="75" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="301" y="90" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="301" y="105" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="301" y="120" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="301" y="135" width="8" height="8" fill="var(--accent-yellow)" opacity="0.8"/>
+                    
+                    <!-- RAM Stick 2 in slot 2 -->
+                    <rect x="320" y="72" width="10" height="76" fill="var(--bg-primary)" stroke="var(--accent-green)" stroke-width="2" rx="2" class="ram-stick"/>
+                    <rect x="321" y="75" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="321" y="90" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="321" y="105" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="321" y="120" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="321" y="135" width="8" height="8" fill="var(--accent-yellow)" opacity="0.8"/>
+                    
+                    <!-- RAM Stick 3 in slot 3 -->
+                    <rect x="340" y="72" width="10" height="76" fill="var(--bg-primary)" stroke="var(--accent-green)" stroke-width="2" rx="2" class="ram-stick"/>
+                    <rect x="341" y="75" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="341" y="90" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="341" y="105" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="341" y="120" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="341" y="135" width="8" height="8" fill="var(--accent-yellow)" opacity="0.8"/>
+                    
+                    <!-- RAM Stick 4 in slot 4 -->
+                    <rect x="360" y="72" width="10" height="76" fill="var(--bg-primary)" stroke="var(--accent-green)" stroke-width="2" rx="2" class="ram-stick"/>
+                    <rect x="361" y="75" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="361" y="90" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="361" y="105" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="361" y="120" width="8" height="12" fill="var(--accent-green)" opacity="0.3"/>
+                    <rect x="361" y="135" width="8" height="8" fill="var(--accent-yellow)" opacity="0.8"/>
+                    
+                    <!-- RGB Lighting Strip across all RAM -->
+                    <rect x="300" y="67" width="72" height="5" class="rgb-strip" rx="2">
+                        <animate attributeName="fill" values="var(--accent-green);var(--accent-purple);var(--accent-teal);var(--accent-yellow);#ff0080;var(--accent-green)" 
+                                 dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    
+                    <!-- RGB Glow Effect around entire RAM area -->
+                    <rect x="298" y="65" width="76" height="88" fill="none" stroke="currentColor" stroke-width="1" rx="4" opacity="0.4" class="rgb-glow">
+                        <animate attributeName="stroke" values="var(--accent-green);var(--accent-purple);var(--accent-teal);var(--accent-yellow);#ff0080;var(--accent-green)" 
+                                 dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    
+                    <text x="335" y="165" text-anchor="middle" fill="var(--accent-green)" font-size="10" font-weight="bold" stroke="white" stroke-width="0.5">64GB DDR5 RGB</text>
+                </g>
+</svg>

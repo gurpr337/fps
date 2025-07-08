@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 280">
+<defs>
+                    <linearGradient id="motherboardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#006400;stop-opacity:0.8"/>
+                        <stop offset="100%" style="stop-color:#228B22;stop-opacity:0.6"/>
+                    </linearGradient>
+                    <linearGradient id="gpuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-green);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:#004d1a;stop-opacity:1"/>
+                    </linearGradient>
+                    <radialGradient id="fanGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-purple);stop-opacity:0.3"/>
+                    </radialGradient>
+                    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.6"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <linearGradient id="caseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--bg-primary);stop-opacity:1"/>
+                        <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.8"/>
+                    </linearGradient>
+                    <radialGradient id="galaxyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.4"/>
+                        <stop offset="100%" style="stop-color:var(--bg-primary);stop-opacity:0.1"/>
+                    </radialGradient>
+                </defs>
+<g id="stage-13-graphics" class="stage-graphics-layer hidden">
+                    <!-- Dark Matter Container -->
+                    <rect x="400" y="200" width="60" height="40" fill="var(--bg-primary)" stroke="var(--accent-purple)" stroke-width="2" rx="4" class="dark-matter-tank"/>
+                    <!-- Dark Matter Wisps -->
+                    <path d="M 410 210 Q 420 200 430 210 Q 440 220 450 210 Q 460 200 470 210" 
+                          fill="none" stroke="var(--accent-purple)" stroke-width="2" opacity="0.7" class="dark-matter-wisp">
+                        <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M 415 225 Q 425 215 435 225 Q 445 235 455 225" 
+                          fill="none" stroke="var(--accent-purple)" stroke-width="2" opacity="0.5" class="dark-matter-wisp">
+                        <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.5s" repeatCount="indefinite"/>
+                    </path>
+                    <!-- Dark Matter Particles -->
+                    <circle cx="420" cy="215" r="2" fill="var(--accent-purple)" class="dark-matter-particle">
+                        <animate attributeName="cy" values="215;220;215" dur="1.5s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="440" cy="225" r="2" fill="var(--accent-purple)" class="dark-matter-particle">
+                        <animate attributeName="cy" values="225;220;225" dur="1.8s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Cooling connection to computer -->
+                    <path d="M 400 220 Q 350 210 300 200" fill="none" stroke="var(--accent-purple)" stroke-width="3" class="dark-cooling-line"/>
+                    <text x="430" y="260" text-anchor="middle" fill="var(--accent-purple)" font-size="10" font-weight="bold" stroke="white" stroke-width="0.5">DARK MATTER COOLING</text>
+                </g>
+</svg>
