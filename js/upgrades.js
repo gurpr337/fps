@@ -115,6 +115,125 @@ export function calculateUpgradeCost(baseCost, level, multiplier) {
   return Math.floor(baseCost * Math.pow(multiplier, level));
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Upgrade-related DOM helpers & purchase logic
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Update one upgrade card's cost/level/button state in the UI.
+ * The heavy DOM cache object `elements` is still owned by the legacy code –
+ * we access it via `window.elements` until the refactor is complete.
+ */
+export function updateUpgradeUI(upgradeId, upgrade = upgradesConfig[upgradeId]) {
+  const elements = window.elements || {};
+  const costElement  = elements[`${upgradeId}-cost`];
+  const levelElement = elements[`${upgradeId}-level`];
+  const buyButton    = elements[`buy-${upgradeId}`];
+  const upgradeCard  = elements[`upgrade-card-${upgradeId}`];
+  const maxedSet     = window.maxedOutUpgradesSet || new Set();
+  const money        = window.money ?? 0;
+
+  if (!upgradeCard || maxedSet.has(upgradeId)) return;
+
+  upgradeCard.classList.remove('hidden');
+
+  if (upgrade.level >= MAX_UPGRADE_LEVEL) {
+    if (costElement)  costElement.textContent  = 'MAX LEVEL!';
+    if (levelElement) levelElement.textContent = MAX_UPGRADE_LEVEL;
+    if (buyButton) {
+      buyButton.disabled = true;
+      buyButton.classList.add('disabled-btn');
+      buyButton.textContent = 'MAXED';
+    }
+    return;
+  }
+
+  const nextCost = calculateUpgradeCost(upgrade.baseCost, upgrade.level, upgrade.costMultiplier);
+  if (costElement)  costElement.textContent  = `Cost: $${(nextCost).toLocaleString()}`;
+  if (levelElement) levelElement.textContent = upgrade.level;
+  if (buyButton) {
+    buyButton.disabled = money < nextCost;
+    buyButton.classList.toggle('disabled-btn', buyButton.disabled);
+    buyButton.textContent = 'Buy';
+  }
+}
+
+/** Toast & card removal when an upgrade hits max level */
+export function handleMaxLevelReached(upgradeId) {
+  const elements   = window.elements || {};
+  const upgradeCard = elements[`upgrade-card-${upgradeId}`];
+  const maxedSet    = window.maxedOutUpgradesSet || (window.maxedOutUpgradesSet = new Set());
+  if (!upgradeCard || maxedSet.has(upgradeId)) return;
+
+  maxedSet.add(upgradeId);
+
+  // Congratulatory overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'message-box-overlay';
+  overlay.style.opacity = '0';
+  const content = document.createElement('div');
+  content.className = 'message-box-content';
+  overlay.appendChild(content);
+  const upgradeTitle = upgradeCard.querySelector('h3')?.textContent ?? upgradeId;
+  content.innerHTML = `
+    <button class="message-box-close-button">&times;</button>
+    <h3 class="text-xl font-bold text-accent-teal mb-2">Congratulations!</h3>
+    <p class="mb-3 text-lg">You've maxed out your "${upgradeTitle}"!</p>
+    <p class="text-md text-gray-400">Its effects will continue to boost your game!</p>`;
+  document.body.appendChild(overlay);
+  content.querySelector('.message-box-close-button').addEventListener('click', () => {
+    overlay.style.opacity = '0';
+    overlay.addEventListener('transitionend', () => overlay.remove(), {once:true});
+  });
+  setTimeout(() => overlay.style.opacity = '1', 10);
+  setTimeout(() => {
+    overlay.style.opacity = '0';
+    overlay.addEventListener('transitionend', () => overlay.remove(), {once:true});
+  }, 2500);
+
+  // Fade/remove card
+  upgradeCard.classList.add('fade-out');
+  upgradeCard.addEventListener('transitionend', () => {
+    upgradeCard.remove();
+    window.saveGame?.();
+  }, {once:true});
+}
+
+/** Main purchase entry point */
+export function buyUpgrade(upgradeId) {
+  const upgrade = upgradesConfig[upgradeId];
+  if (!upgrade) {
+    console.error(`Upgrade ${upgradeId} not found`);
+    return;
+  }
+  if (upgrade.level >= MAX_UPGRADE_LEVEL) {
+    handleMaxLevelReached(upgradeId);
+    return;
+  }
+
+  const moneyRef = { value: window.money ?? 0 };
+  const cost = calculateUpgradeCost(upgrade.baseCost, upgrade.level, upgrade.costMultiplier);
+  if (moneyRef.value < cost) return; // cannot afford
+
+  window.money = moneyRef.value - cost;
+  upgrade.level++;
+
+  // Special logic preserved from original code
+  if (upgradeId === 'click-upgrade' && upgrade.level <= MAX_UPGRADE_LEVEL) {
+    window.downloadProgress = (window.downloadProgress ?? 0) + 10;
+    if (window.downloadProgress > (window.downloadTarget ?? 100)) {
+      window.downloadProgress = window.downloadTarget;
+    }
+  }
+
+  window.recalculateStats?.();
+  if (upgrade.level >= MAX_UPGRADE_LEVEL) {
+    handleMaxLevelReached(upgradeId);
+  } else {
+    window.saveGame?.();
+  }
+}
+
 // For legacy (non-module) code that still relies on globals we attach these
 // exports to the window object.  This lets us migrate incrementally without
 // breaking the existing inline script.
@@ -122,4 +241,7 @@ if (typeof window !== 'undefined') {
   window.MAX_UPGRADE_LEVEL = MAX_UPGRADE_LEVEL;
   window.upgradesConfig = upgradesConfig;
   window.calculateUpgradeCost = calculateUpgradeCost;
+  window.updateUpgradeUI    = updateUpgradeUI;
+  window.handleMaxLevelReached = handleMaxLevelReached;
+  window.buyUpgrade         = buyUpgrade;
 }
